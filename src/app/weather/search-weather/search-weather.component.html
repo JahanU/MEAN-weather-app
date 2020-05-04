@@ -1,26 +1,28 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <input #box (keyup.enter)="getLocationData(box.value)">
-    </div>
-
-    <div class="card" style="width: 18rem;">
-      <img
-        src="https://images.pexels.com/photos/301599/pexels-photo-301599.jpeg?cs=srgb&dl=abstract-beach-bright-clouds-301599.jpg&fm=jpg"
-        class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title {{ weatherData && weatherData.name}}</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Cras justo odio</li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">Vestibulum at eros</li>
-      </ul>
-      <div class="card-body">
+      <mat-form-field class="example-full-width">
+        <mat-label>Enter a location</mat-label>
+        <input #box matInput placeholder="Ex. London" (keyup.enter)="getLocationData(box.value)">
+      </mat-form-field>
+      <div class="card" style="width: 50%;" *ngIf="weatherData">
+        <img
+          src="https://images.pexels.com/photos/301599/pexels-photo-301599.jpeg?cs=srgb&dl=abstract-beach-bright-clouds-301599.jpg&fm=jpg"
+          class="card-img-top" alt="...">
+        <h5 class="list-group-item">{{weatherData.name}}, {{weatherData.sys.country}}</h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{weatherData.weather[0].description}}</li>
+          <li class="list-group-item">Feels like: {{weatherData.main.feels_like}}°C</li>
+          <li class="list-group-item">Humidty: {{weatherData.main.humidity}}%</li>
+          <li class="list-group-item">Wind speed: {{weatherData.wind.speed}}mph, degrees:
+            {{weatherData.wind.cardinalDirection}}</li>
+          <li class="list-group-item">Sunrise at: {{weatherData.sys.sunriseString}}, sunset at:
+            {{weatherData.sys.sunsetString}}</li>
+        </ul>
+        <!-- <div class="card-body">
         <a href="#" class="card-link">Card link</a>
         <a href="#" class="card-link">Another link</a>
+      </div> -->
       </div>
     </div>
   </div>

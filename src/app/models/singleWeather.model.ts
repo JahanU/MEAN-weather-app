@@ -11,16 +11,25 @@ export interface singleWeather {
         pressure: number,
         humidity: number,
         temp_min: number,
-        temp_max: number
+        temp_max: number,
+        feels_like: string
     },
     dt: number,
     wind: {
         speed: number,
-        deg: number
+        deg: number,
+        cardinalDirection: string
     },
     clouds: {
         all: number
     },
+    sys: {
+        country: string,
+        sunrise: number,
+        sunset: number,
+        sunriseString: string,
+        sunsetString: string
+    }
     weather: [
         {
             id: number,
