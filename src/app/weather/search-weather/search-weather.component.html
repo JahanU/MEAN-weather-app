@@ -1,28 +1,29 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <mat-label>Enter a location</mat-label>
-        <input #box matInput placeholder="Ex. London" (keyup.enter)="getLocationData(box.value)">
+        <input #box matInput placeholder=" Ex. London" (keyup.enter)="getLocationData(box.value)">
       </mat-form-field>
-      <div class="card" style="width: 50%;" *ngIf="weatherData">
-        <img
-          src="https://images.pexels.com/photos/301599/pexels-photo-301599.jpeg?cs=srgb&dl=abstract-beach-bright-clouds-301599.jpg&fm=jpg"
-          class="card-img-top" alt="...">
-        <h5 class="list-group-item">{{weatherData.name}}, {{weatherData.sys.country}}</h5>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">{{weatherData.weather[0].description}}</li>
-          <li class="list-group-item">Feels like: {{weatherData.main.feels_like}}°C</li>
-          <li class="list-group-item">Humidty: {{weatherData.main.humidity}}%</li>
-          <li class="list-group-item">Wind speed: {{weatherData.wind.speed}}mph, degrees:
-            {{weatherData.wind.cardinalDirection}}</li>
-          <li class="list-group-item">Sunrise at: {{weatherData.sys.sunriseString}}, sunset at:
-            {{weatherData.sys.sunsetString}}</li>
-        </ul>
-        <!-- <div class="card-body">
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
-      </div> -->
+
+      <div class="weatherWidget">
+        <div class="weatherWidgetRow" [@fadeData]="fadeState()">
+          <i *ngIf="weatherData && weatherData.sys.isDayTime" class="fa fa-sun-o sun"> </i>
+          <i *ngIf="weatherData && !weatherData.sys.isDayTime" class="fa fa-sun-o moon"> </i>
+          <i class="fa fa-cloud cloud"> </i>
+
+          <div *ngIf="weatherData">
+            <h5>{{weatherData.name}}, {{weatherData.sys.country}}</h5>
+            <p> {{weatherData.weather[0].description}} </p>
+            <p> <b>Feels like: </b> {{weatherData.main.feels_like}}°C </p>
+            <p> Humidty: {{weatherData.main.humidity}}% </p>
+            <p> Wind speed: {{weatherData.wind.speed}}mph, degrees:
+              {{weatherData.wind.cardinalDirection}} </p>
+            <p>Sunrise at: {{weatherData.sys.sunriseString}}, sunset at:
+              {{weatherData.sys.sunsetString}}</p>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>

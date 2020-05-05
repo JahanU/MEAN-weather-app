@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
 export class WeatherService {
   url = 'https://api.openweathermap.org/data/2.5/weather';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getWeatherOfLocation(locationName: string): Observable<singleWeather> {
     let params = new HttpParams() // Creating fetch URL & setting params
@@ -21,8 +21,6 @@ export class WeatherService {
       .set('units', 'metric')
       .set('appid', environment.apikey);
 
-    return this.http
-      .get<singleWeather>(this.url, { params })
-      .pipe(map((res) => res));
+    return this.http.get<singleWeather>(this.url, { params }).pipe(map((res) => res));
   }
 }

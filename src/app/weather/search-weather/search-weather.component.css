@@ -1,0 +1,41 @@
+mat-form-field {
+  width: 100%;
+}
+
+.weatherWidget {
+  display: block;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background: black;
+  background: linear-gradient(#080033, #323ec0);
+}
+
+.weatherWidgetRow {
+  display: block;
+  margin: 0 auto;
+  width: fit-content;
+  padding: 10px;
+}
+
+.fa {
+  font-size: 48px;
+  margin: 10px;
+}
+
+.sun {
+  color: yellow;
+  filter: drop-shadow(0px 0px 5px yellow);
+  /* Must use filter as it is an svg image */
+}
+
+.moon {
+  color: white;
+  filter: drop-shadow(0px 0px 5px white)
+}
+
+.cloud {
+  color: rgb(69, 143, 212);
+  filter: drop-shadow(0px 0px 5px rgb(69, 143, 212));
+}

@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { WeatherComponent } from './weather/weather.component';
 import { MaterialModule } from './material.module';
 import { SearchWeatherComponent } from './weather/search-weather/search-weather.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,6 +19,7 @@ import { SearchWeatherComponent } from './weather/search-weather/search-weather.
     AppRoutingModule,
     HttpClientModule,
     MaterialModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

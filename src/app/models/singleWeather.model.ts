@@ -28,7 +28,8 @@ export interface singleWeather {
         sunrise: number,
         sunset: number,
         sunriseString: string,
-        sunsetString: string
+        sunsetString: string,
+        isDayTime: boolean
     }
     weather: [
         {

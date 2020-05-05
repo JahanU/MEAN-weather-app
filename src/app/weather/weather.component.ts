@@ -11,9 +11,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./weather.component.css'],
 })
 export class WeatherComponent implements OnInit {
-  public weatherData: Observable<singleWeather[]>;
 
-  constructor(private weatherService: WeatherService) {}
+  // public weatherData: Observable<singleWeather[]>;
 
-  ngOnInit() {}
+  constructor(private weatherService: WeatherService) { }
+
+  ngOnInit() { }
 }
