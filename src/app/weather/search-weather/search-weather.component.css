@@ -1,5 +1,140 @@
-mat-form-field {
-  width: 100%;
+.sun {
+  font-size: 48px;
+  margin: 15px 0px 15px 0px;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  color: yellow;
+  -webkit-filter: drop-shadow(0px 0px 5px yellow);
+          filter: drop-shadow(0px 0px 5px yellow);
+  -webkit-animation-name: spin-animation;
+          animation-name: spin-animation;
+  -webkit-animation-duration: 9s;
+          animation-duration: 9s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-direction: normal;
+          animation-direction: normal;
+  /* Must use filter as it is an svg image */
+}
+
+.snowflake {
+  font-size: 48px;
+  margin: 15px 0px 15px 0px;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  color: white;
+  -webkit-filter: drop-shadow(0px 0px 5px #aaf2ff);
+          filter: drop-shadow(0px 0px 5px #aaf2ff);
+  -webkit-animation-name: spin-animation;
+          animation-name: spin-animation;
+  -webkit-animation-duration: 10s;
+          animation-duration: 10s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-direction: normal;
+          animation-direction: normal;
+}
+
+@-webkit-keyframes spin-animation {
+  from {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  to {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+}
+
+@keyframes spin-animation {
+  from {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  to {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+}
+
+.moon {
+  font-size: 48px;
+  margin: 15px 0px 15px 0px;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  color: white;
+  -webkit-filter: drop-shadow(0px 0px 5px white);
+          filter: drop-shadow(0px 0px 5px white);
+  -webkit-animation-name: moon-tilt;
+          animation-name: moon-tilt;
+  -webkit-animation-duration: 3s;
+          animation-duration: 3s;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+@-webkit-keyframes moon-tilt {
+  from {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  to {
+    -webkit-transform: rotate(-30deg);
+            transform: rotate(-30deg);
+  }
+}
+
+@keyframes moon-tilt {
+  from {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  to {
+    -webkit-transform: rotate(-30deg);
+            transform: rotate(-30deg);
+  }
+}
+
+.cloud {
+  font-size: 48px;
+  margin: 15px 0px 15px 0px;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  color: #458fd4;
+  -webkit-filter: drop-shadow(0px 0px 5px #458fd4);
+          filter: drop-shadow(0px 0px 5px #458fd4);
+  -webkit-animation-name: cloud-alternate;
+          animation-name: cloud-alternate;
+  -webkit-animation-duration: 4s;
+          animation-duration: 4s;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+@-webkit-keyframes cloud-alternate {
+  from {
+    -webkit-transform: translateX(-30px);
+            transform: translateX(-30px);
+  }
+  to {
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+  }
+}
+
+@keyframes cloud-alternate {
+  from {
+    -webkit-transform: translateX(-30px);
+            transform: translateX(-30px);
+  }
+  to {
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+  }
 }
 
 .weatherWidget {
@@ -8,34 +143,31 @@ mat-form-field {
   width: 100%;
   height: 100%;
   color: white;
-  background: black;
+  /* sunny */
+}
+
+.widgetColour {
+  background: -webkit-gradient(linear, left top, left bottom, from(#080033), to(#323ec0));
   background: linear-gradient(#080033, #323ec0);
+  /* night */
+  background: -webkit-gradient(linear, left top, left bottom, from(#C2453B), to(#ECC66E));
+  background: linear-gradient(#C2453B, #ECC66E);
+  /* sunny */
+  background: -webkit-gradient(linear, left top, left bottom, from(#15B2D3), to(#FFD700));
+  background: linear-gradient(#15B2D3, #FFD700);
+  /* windy/cloudy */
 }
 
 .weatherWidgetRow {
   display: block;
   margin: 0 auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   padding: 10px;
 }
 
-.fa {
-  font-size: 48px;
-  margin: 10px;
+mat-form-field {
+  width: 100%;
 }
-
-.sun {
-  color: yellow;
-  filter: drop-shadow(0px 0px 5px yellow);
-  /* Must use filter as it is an svg image */
-}
-
-.moon {
-  color: white;
-  filter: drop-shadow(0px 0px 5px white)
-}
-
-.cloud {
-  color: rgb(69, 143, 212);
-  filter: drop-shadow(0px 0px 5px rgb(69, 143, 212));
-}
+/*# sourceMappingURL=search-weather.component.css.map */

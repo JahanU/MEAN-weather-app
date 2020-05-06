@@ -1,0 +1,78 @@
+@mixin icon {
+  font-size: 48px;
+  margin: 15px 0px 15px 0px;
+  animation-iteration-count: infinite;
+}
+
+.sun {
+  @include icon();
+  color: yellow;
+  filter: drop-shadow(0px 0px 5px yellow);
+  animation-name: spin-animation;
+  animation-duration: 9s;
+  animation-timing-function: linear;
+  animation-direction: normal;
+  /* Must use filter as it is an svg image */
+}
+
+.snowflake {
+  @include icon();
+
+  color: rgb(255, 255, 255);
+  filter: drop-shadow(0px 0px 5px rgb(170, 242, 255));
+  animation-name: spin-animation;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-direction: normal;
+}
+
+@keyframes spin-animation {
+  from {
+    transform: rotate(0)
+  }
+
+  to {
+    transform: rotate(-360deg)
+  }
+}
+
+.moon {
+  @include icon();
+
+  color: white;
+  filter: drop-shadow(0px 0px 5px white);
+  animation-name: moon-tilt;
+  animation-duration: 3s;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+@keyframes moon-tilt {
+  from {
+    transform: rotate(0)
+  }
+
+  to {
+    transform: rotate(-30deg)
+  }
+}
+
+.cloud {
+  @include icon();
+  color: rgb(69, 143, 212);
+  filter: drop-shadow(0px 0px 5px rgb(69, 143, 212));
+  animation-name: cloud-alternate;
+  animation-duration: 4s;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+@keyframes cloud-alternate {
+  from {
+    transform: translateX(-30px)
+  }
+
+  to {
+    transform: translateX(0px)
+  }
+}

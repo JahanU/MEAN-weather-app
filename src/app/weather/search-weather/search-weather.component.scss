@@ -1,0 +1,31 @@
+@import "./icons";
+
+// background: linear-gradient(#080033, #323ec0);
+// /* night */
+// background: linear-gradient(#C2453B, #ECC66E);
+// /* sunny */
+// background: linear-gradient(#15B2D3, #FFD700);
+// /* windy/cloudy */
+
+$primaryBtn: red;
+$widgetColour: linear-gradient(#080033, #323ec0);
+
+.weatherWidget {
+  display: block;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+
+
+.weatherWidgetRow {
+  display: block;
+  margin: 0 auto;
+  width: fit-content;
+  padding: 10px;
+}
+
+mat-form-field {
+  width: 100%;
+}

@@ -9,23 +9,25 @@ import { timeInterval } from 'rxjs/operators';
   templateUrl: './search-weather.component.html',
   styleUrls: ['./search-weather.component.css'],
   animations: [
-    trigger('fadeData', [
+    trigger('fadeTrigger', [
       state('show', style({
         opacity: 1,
       })),
       state('hide', style({
-        opacity: 0
+        opacity: 0,
       })),
-      transition('show => hide', animate('10ms ease-in-out')),
-      transition('hide => show', animate('1000ms ease-in-out')),
+      transition('show => hide', animate('10ms')),
+      transition('hide => show', animate('1000ms'))
     ]),
   ]
 })
+
+
 export class SearchWeatherComponent implements OnInit {
 
   weatherData: singleWeather;
-  fade = false;
-  moveCloud = false;
+  fadeState = false;
+  cloudState = false;
 
   constructor(private weatherService: WeatherService) { }
 
@@ -33,12 +35,9 @@ export class SearchWeatherComponent implements OnInit {
     this.getLocationData('london');
   }
 
-  fadeState = () => this.fade ? 'show' : 'hide';
-
-
 
   getLocationData(locationName: string) {
-    this.moveCloud = this.fade = false;
+    this.fadeState = false;
     this.weatherService
       .getWeatherOfLocation(locationName)
       .subscribe((response) => {
@@ -46,9 +45,9 @@ export class SearchWeatherComponent implements OnInit {
         this.weatherData.sys.sunriseString = new Date(response.sys.sunrise * 1000).toLocaleTimeString(); //https://www.w3schools.com/js/js_dates.asp
         this.weatherData.sys.sunsetString = new Date(response.sys.sunset * 1000).toLocaleTimeString();
         this.weatherData.wind.cardinalDirection = this.getCardinalDirection(response.wind.deg);
-        this.weatherData.sys.isDayTime = new Date().getTime().toLocaleString() < this.weatherData.sys.sunsetString
+        this.weatherData.sys.isDayTime = new Date().getTime() < parseInt(this.weatherData.sys.sunriseString);
         console.log(this.weatherData)
-        this.moveCloud = this.fade = true;
+        this.fadeState = true;
       });
   }
 
@@ -56,5 +55,15 @@ export class SearchWeatherComponent implements OnInit {
     const directions = ['↑ N', '↗ NE', '→ E', '↘ SE', '↓ S', '↙ SW', '← W', '↖ NW'];
     return directions[Math.round(degree / 45) % 8];
   }
+
+  setWidgetColour(isDay: boolean) {
+    if (isDay) {
+      return 'linear-gradient(#15B2D3, #FFD700)';
+    }
+    return 'linear-gradient(#080033, #323ec0)';
+  }
+  getFadeState = () => this.fadeState ? 'show' : 'hide';
+  containsClouds = (feelsLike: string) => feelsLike.includes('cloud');
+  containsSnow = (feelsLike: string) => feelsLike.includes('snow');
 
 }

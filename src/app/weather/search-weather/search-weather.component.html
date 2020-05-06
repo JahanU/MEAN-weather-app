@@ -5,22 +5,24 @@
         <mat-label>Enter a location</mat-label>
         <input #box matInput placeholder=" Ex. London" (keyup.enter)="getLocationData(box.value)">
       </mat-form-field>
-
-      <div class="weatherWidget">
-        <div class="weatherWidgetRow" [@fadeData]="fadeState()">
-          <i *ngIf="weatherData && weatherData.sys.isDayTime" class="fa fa-sun-o sun"> </i>
-          <i *ngIf="weatherData && !weatherData.sys.isDayTime" class="fa fa-sun-o moon"> </i>
-          <i class="fa fa-cloud cloud"> </i>
+      <div class="weatherWidget" [@fadeTrigger]="getFadeState()" [style.background]="setWidgetColour(false)">
+        <div class="weatherWidgetRow" *ngIf="weatherData">
+          <i *ngIf="weatherData && weatherData.sys.isDayTime" class="fa fa-sun sun"> </i>
+          <i *ngIf="weatherData && !weatherData.sys.isDayTime" class="fa fa-moon moon"> </i>
+          <i *ngIf="weatherData && containsClouds(weatherData.weather[0].description)" class="fa fa-cloud cloud">
+          </i>
+          <i *ngIf="weatherData && containsSnow(weatherData.weather[0].description)"
+            class="fa fa-snowflake snowflake"></i>
 
           <div *ngIf="weatherData">
-            <h5>{{weatherData.name}}, {{weatherData.sys.country}}</h5>
-            <p> {{weatherData.weather[0].description}} </p>
-            <p> <b>Feels like: </b> {{weatherData.main.feels_like}}°C </p>
-            <p> Humidty: {{weatherData.main.humidity}}% </p>
-            <p> Wind speed: {{weatherData.wind.speed}}mph, degrees:
-              {{weatherData.wind.cardinalDirection}} </p>
-            <p>Sunrise at: {{weatherData.sys.sunriseString}}, sunset at:
-              {{weatherData.sys.sunsetString}}</p>
+            <h5> <b> {{weatherData.name}}, {{weatherData.sys.country}}</b></h5>
+            <p> <b> {{weatherData.weather[0].description}} </b></p>
+            <p> Feels like: <b> {{weatherData.main.feels_like}}°C </b></p>
+            <p> Humidty: <b> {{weatherData.main.humidity}}%</b> </p>
+            <p> Wind speed: <b> {{weatherData.wind.speed}}mph</b>,
+              <b> {{weatherData.wind.cardinalDirection}}</b> </p>
+            <p>Sunrise at: <b> {{weatherData.sys.sunriseString}}</b>, sunset at:
+              <b> {{weatherData.sys.sunsetString}}</b></p>
           </div>
 
         </div>
