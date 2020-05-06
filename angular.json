@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "techspert-full-stack": {
+    "MEAN-weather-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/techspert-full-stack",
+            "outputPath": "dist/MEAN-weather-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "techspert-full-stack:build"
+            "browserTarget": "MEAN-weather-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "techspert-full-stack:build:production"
+              "browserTarget": "MEAN-weather-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "techspert-full-stack:build"
+            "browserTarget": "MEAN-weather-app:build"
           }
         },
         "test": {
@@ -110,16 +110,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "techspert-full-stack:serve"
+            "devServerTarget": "MEAN-weather-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "techspert-full-stack:serve:production"
+              "devServerTarget": "MEAN-weather-app:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "techspert-full-stack"
+  "defaultProject": "MEAN-weather-app"
 }
