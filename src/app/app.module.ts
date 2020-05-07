@@ -19,7 +19,7 @@ import { SearchWeatherComponent } from './weather/search-weather/search-weather.
     AppRoutingModule,
     HttpClientModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

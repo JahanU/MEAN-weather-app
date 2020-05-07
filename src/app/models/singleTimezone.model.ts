@@ -14,4 +14,5 @@ export interface singleTimezone {
   zoneStart: number;
   date: Date;
   currentTime: string;
+  isDay: boolean
 }

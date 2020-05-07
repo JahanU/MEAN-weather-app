@@ -10,6 +10,8 @@ import {
   animate,
   transition,
 } from '@angular/animations';
+import * as SunCalc from 'suncalc';
+import { getSunrise, getSunset } from 'sunrise-sunset-js';
 
 @Component({
   selector: 'app-search-weather',
@@ -32,10 +34,10 @@ import {
 })
 export class SearchWeatherComponent implements OnInit {
 
-
   weatherData: singleWeather;
   timeData: singleTimezone;
   fadeState = false;
+  timerIntevalId;
 
   constructor(
     private weatherService: WeatherService,
@@ -49,24 +51,22 @@ export class SearchWeatherComponent implements OnInit {
   // Fetchers 
   fetchLocationData(locationName: string) {
     this.fadeState = false;
-    this.weatherService.fetchWeatherOfLocation(locationName).subscribe((response) => {
-      this.weatherData = response;
-      this.fetchLocationTime(response.coord.lat, response.coord.lon);
-      this.weatherData.sys.sunriseString = new Date(response.sys.sunrise * 1000).toLocaleTimeString(); //https://www.w3schools.com/js/js_dates.asp
-      this.weatherData.sys.sunsetString = new Date(response.sys.sunset * 1000).toLocaleTimeString();
-      this.weatherData.wind.cardinalDirection = this.getCardinalDirection(response.wind.deg);
+    this.timeData = this.weatherData = null;
+    this.weatherService.fetchWeatherOfLocation(locationName).subscribe((data) => {
+      this.weatherData = data;
+      this.fetchLocationTime(data.coord.lat, data.coord.lon, data);
+      this.setTimeAndDate(data);
+      this.weatherData.wind.cardinalDirection = this.getCardinalDirection(data.wind.deg);
       console.log(this.weatherData);
       this.fadeState = true;
     });
   }
 
-  fetchLocationTime = (lat: number, lon: number) =>
-    this.timeService.getTimeOfLocation(lat, lon).subscribe((response) => {
-      this.timeData = response;
-      this.timeData.date = new Date(response.formatted);
-      console.log(this.timeData);
+  fetchLocationTime = (lat: number, lon: number, weatherResp: singleWeather) =>
+    this.timeService.getTimeOfLocation(lat, lon).subscribe((timeData) => {
+      this.timeData = timeData;
+      this.setIsDay(weatherResp, timeData);
       this.updateTimeEverySec();
-
     });
 
   // Getters
@@ -76,22 +76,41 @@ export class SearchWeatherComponent implements OnInit {
   }
 
   // Setters
+  setTimeAndDate(data: singleWeather) {
+    let sunrise = new Date((data.sys.sunrise * 1000));
+    sunrise.setSeconds(sunrise.getSeconds() + (data.timezone - 3600));
+    this.weatherData.sys.sunriseString = sunrise.toLocaleTimeString()
+    let sunset = new Date((data.sys.sunset * 1000));
+    sunset.setSeconds(sunset.getSeconds() + (data.timezone - 3600));
+    this.weatherData.sys.sunsetString = sunset.toLocaleTimeString();
+  }
+
+  setIsDay(weatherData: singleWeather, timeData: singleTimezone) {
+    this.timeData.date = new Date(timeData.formatted);
+    let sunset = new Date(weatherData.sys.sunset * 1000);
+    this.timeData.isDay = this.timeData.date < sunset;
+    clearInterval(this.timerIntevalId);
+  }
+
   setWidgetColour = (isDay: boolean) =>
     isDay
-      ? 'linear-gradient(#15B2D3, #FFD700)'
-      : 'linear-gradient(#080033, #323ec0)';
+      ? 'linear-gradient(LightSkyBlue, LightBlue)'
+      : 'linear-gradient(MidnightBlue, RoyalBlue)';
 
   setCloudColour = (isDay: boolean) => (isDay ? 'white' : 'dodgerBlue');
 
   // Helper funcs for HTML/Animation
+  updateTimeEverySec() {
+    if (this.timeData != null && this.timeData.date != null)
+      this.timerIntevalId = setInterval(() => {
+        let time = new Date(this.timeData.date);
+        let updateTime = time.setSeconds(time.getSeconds() + 1);
+        this.timeData.currentTime = new Date(updateTime).toLocaleTimeString();
+      }, 1000);
+  }
+
   getFadeState = () => (this.fadeState ? 'show' : 'hide');
   containsClouds = (feelsLike: string) => feelsLike.includes('cloud');
   containsSnow = (feelsLike: string) => feelsLike.includes('snow');
 
-  updateTimeEverySec() {
-    setInterval(() => {
-      let updateTime = this.timeData.date.setSeconds(this.timeData.date.getSeconds() + 1);
-      this.timeData.currentTime = new Date(updateTime).toLocaleTimeString();
-    }, 1000);
-  }
 }

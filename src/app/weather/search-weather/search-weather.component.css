@@ -4,8 +4,8 @@
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
   color: yellow;
-  -webkit-filter: drop-shadow(0px 0px 5px yellow);
-          filter: drop-shadow(0px 0px 5px yellow);
+  -webkit-filter: drop-shadow(0px 0px 5px orange);
+          filter: drop-shadow(0px 0px 5px orange);
   -webkit-animation-name: spin-animation;
           animation-name: spin-animation;
   -webkit-animation-duration: 9s;
@@ -23,8 +23,8 @@
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
   color: white;
-  -webkit-filter: drop-shadow(0px 0px 5px #aaf2ff);
-          filter: drop-shadow(0px 0px 5px #aaf2ff);
+  -webkit-filter: drop-shadow(0px 0px 5px, LightSkyBlue);
+          filter: drop-shadow(0px 0px 5px, LightSkyBlue);
   -webkit-animation-name: spin-animation;
           animation-name: spin-animation;
   -webkit-animation-duration: 10s;
@@ -63,8 +63,8 @@
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
   color: white;
-  -webkit-filter: drop-shadow(0px 0px 5px white);
-          filter: drop-shadow(0px 0px 5px white);
+  -webkit-filter: drop-shadow(0px 0px 5px SlateGray);
+          filter: drop-shadow(0px 0px 5px SlateGray);
   -webkit-animation-name: moon-tilt;
           animation-name: moon-tilt;
   -webkit-animation-duration: 3s;
@@ -102,8 +102,9 @@
   margin: 15px 0px 15px 0px;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
-  -webkit-filter: drop-shadow(0px 0px 5px #b7dcff);
-          filter: drop-shadow(0px 0px 5px #b7dcff);
+  color: white;
+  -webkit-filter: drop-shadow(0px 0px 5px, LightSkyBlue);
+          filter: drop-shadow(0px 0px 5px, LightSkyBlue);
   -webkit-animation-name: cloud-alternate;
           animation-name: cloud-alternate;
   -webkit-animation-duration: 4s;

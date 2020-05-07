@@ -7,7 +7,7 @@
 .sun {
   @include icon();
   color: yellow;
-  filter: drop-shadow(0px 0px 5px yellow);
+  filter: drop-shadow(0px 0px 5px orange);
   animation-name: spin-animation;
   animation-duration: 9s;
   animation-timing-function: linear;
@@ -17,8 +17,8 @@
 
 .snowflake {
   @include icon();
-  color: rgb(255, 255, 255);
-  filter: drop-shadow(0px 0px 5px rgb(170, 242, 255));
+  color: white;
+  filter: drop-shadow(0px 0px 5px, LightSkyBlue);
   animation-name: spin-animation;
   animation-duration: 10s;
   animation-timing-function: linear;
@@ -38,7 +38,7 @@
 .moon {
   @include icon();
   color: white;
-  filter: drop-shadow(0px 0px 5px white);
+  filter: drop-shadow(0px 0px 5px SlateGray);
   animation-name: moon-tilt;
   animation-duration: 3s;
   animation-timing-function: ease-in-out;
@@ -57,7 +57,8 @@
 
 .cloud {
   @include icon();
-  filter: drop-shadow(0px 0px 5px rgb(183, 220, 255));
+  color: white;
+  filter: drop-shadow(0px 0px 5px, LightSkyBlue);
   animation-name: cloud-alternate;
   animation-duration: 4s;
   animation-timing-function: ease-in-out;
