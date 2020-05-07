@@ -16,7 +16,7 @@ export class WeatherService {
   fetchWeatherOfLocation(locationName: string): Observable<singleWeather> {
     let params = new HttpParams()
       .set('q', locationName)
-      .set('units', 'metrics')
+      .set('units', 'metric')
       .set('appid', environment.WEATHER_API_KEY);
 
     return this.http.get<singleWeather>(this.url, { params })

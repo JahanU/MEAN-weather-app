@@ -55,6 +55,7 @@ export class SearchWeatherComponent implements OnInit {
     clearInterval(this.timerIntevalId);
     this.timeData = this.weatherData = null;
     this.weatherService.fetchWeatherOfLocation(locationName).subscribe((data) => {
+      console.log(data);
       this.weatherData = data;
       this.fetchLocationTime(data.coord.lat, data.coord.lon, data);
       this.setTimeAndDate(data);
