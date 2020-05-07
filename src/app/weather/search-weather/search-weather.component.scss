@@ -18,7 +18,6 @@
   color: white;
 }
 
-
 .weatherWidgetRow {
   display: block;
   margin: 0 auto;
@@ -28,4 +27,8 @@
 
 mat-form-field {
   width: 100%;
+}
+
+input {
+  color: blue;
 }

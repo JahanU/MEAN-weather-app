@@ -157,4 +157,8 @@
 mat-form-field {
   width: 100%;
 }
+
+input {
+  color: blue;
+}
 /*# sourceMappingURL=search-weather.component.css.map */

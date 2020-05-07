@@ -1,10 +1,9 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { singleWeather } from '../models/singleWeather.model';
-import { weatherAPI } from '../models/weatherAPI.model';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -17,10 +16,16 @@ export class WeatherService {
   fetchWeatherOfLocation(locationName: string): Observable<singleWeather> {
     let params = new HttpParams()
       .set('q', locationName)
-      .set('units', 'metric')
+      .set('units', 'metrics')
       .set('appid', environment.WEATHER_API_KEY);
 
-    return this.http.get<singleWeather>(this.url, { params });
-    // return this.http.get(this.url, { params }).pipe(map((res) => res));
+    return this.http.get<singleWeather>(this.url, { params })
+      .pipe(catchError(this.errorHandler));
+  }
+
+  errorHandler(error: HttpErrorResponse) {
+    console.log('failure');
+    console.log(error);
+    return throwError(error.message || "server error.");
   }
 }

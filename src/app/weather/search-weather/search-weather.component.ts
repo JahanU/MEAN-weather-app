@@ -10,8 +10,8 @@ import {
   animate,
   transition,
 } from '@angular/animations';
-import * as SunCalc from 'suncalc';
-import { getSunrise, getSunset } from 'sunrise-sunset-js';
+import { Observable } from 'rxjs';
+import { publish } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-weather',
@@ -37,7 +37,8 @@ export class SearchWeatherComponent implements OnInit {
   weatherData: singleWeather;
   timeData: singleTimezone;
   fadeState = false;
-  timerIntevalId;
+  timerIntevalId; // Reset the timer when searching new location
+  error: string;
 
   constructor(
     private weatherService: WeatherService,
@@ -51,24 +52,27 @@ export class SearchWeatherComponent implements OnInit {
   // Fetchers 
   fetchLocationData(locationName: string) {
     this.fadeState = false;
+    clearInterval(this.timerIntevalId);
     this.timeData = this.weatherData = null;
     this.weatherService.fetchWeatherOfLocation(locationName).subscribe((data) => {
       this.weatherData = data;
       this.fetchLocationTime(data.coord.lat, data.coord.lon, data);
       this.setTimeAndDate(data);
       this.weatherData.wind.cardinalDirection = this.getCardinalDirection(data.wind.deg);
-      console.log(this.weatherData);
       this.fadeState = true;
-    });
+    }, (error) => {
+      console.log('error: ', error);
+      this.error = error
+    })
   }
 
-  fetchLocationTime = (lat: number, lon: number, weatherResp: singleWeather) =>
+  fetchLocationTime(lat: number, lon: number, weatherResp: singleWeather) {
     this.timeService.getTimeOfLocation(lat, lon).subscribe((timeData) => {
       this.timeData = timeData;
       this.setIsDay(weatherResp, timeData);
       this.updateTimeEverySec();
     });
-
+  }
   // Getters
   getCardinalDirection(degree: number) {
     const directions = ['↑ N', '↗ NE', '→ E', '↘ SE', '↓ S', '↙ SW', '← W', '↖ NW',];
@@ -83,13 +87,13 @@ export class SearchWeatherComponent implements OnInit {
     let sunset = new Date((data.sys.sunset * 1000));
     sunset.setSeconds(sunset.getSeconds() + (data.timezone - 3600));
     this.weatherData.sys.sunsetString = sunset.toLocaleTimeString();
+
   }
 
   setIsDay(weatherData: singleWeather, timeData: singleTimezone) {
     this.timeData.date = new Date(timeData.formatted);
     let sunset = new Date(weatherData.sys.sunset * 1000);
     this.timeData.isDay = this.timeData.date < sunset;
-    clearInterval(this.timerIntevalId);
   }
 
   setWidgetColour = (isDay: boolean) =>
@@ -101,7 +105,7 @@ export class SearchWeatherComponent implements OnInit {
 
   // Helper funcs for HTML/Animation
   updateTimeEverySec() {
-    if (this.timeData != null && this.timeData.date != null)
+    if (this.timeData?.date?.valueOf != null)
       this.timerIntevalId = setInterval(() => {
         let time = new Date(this.timeData.date);
         let updateTime = time.setSeconds(time.getSeconds() + 1);
