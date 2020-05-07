@@ -102,9 +102,8 @@
   margin: 15px 0px 15px 0px;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
-  color: #458fd4;
-  -webkit-filter: drop-shadow(0px 0px 5px #458fd4);
-          filter: drop-shadow(0px 0px 5px #458fd4);
+  -webkit-filter: drop-shadow(0px 0px 5px #b7dcff);
+          filter: drop-shadow(0px 0px 5px #b7dcff);
   -webkit-animation-name: cloud-alternate;
           animation-name: cloud-alternate;
   -webkit-animation-duration: 4s;
@@ -143,19 +142,6 @@
   width: 100%;
   height: 100%;
   color: white;
-  /* sunny */
-}
-
-.widgetColour {
-  background: -webkit-gradient(linear, left top, left bottom, from(#080033), to(#323ec0));
-  background: linear-gradient(#080033, #323ec0);
-  /* night */
-  background: -webkit-gradient(linear, left top, left bottom, from(#C2453B), to(#ECC66E));
-  background: linear-gradient(#C2453B, #ECC66E);
-  /* sunny */
-  background: -webkit-gradient(linear, left top, left bottom, from(#15B2D3), to(#FFD700));
-  background: linear-gradient(#15B2D3, #FFD700);
-  /* windy/cloudy */
 }
 
 .weatherWidgetRow {

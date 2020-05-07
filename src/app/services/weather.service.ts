@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { singleWeather } from '../models/singleWeather.model';
 import { weatherAPI } from '../models/weatherAPI.model';
-
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -15,12 +14,13 @@ export class WeatherService {
 
   constructor(private http: HttpClient) { }
 
-  getWeatherOfLocation(locationName: string): Observable<singleWeather> {
-    let params = new HttpParams() // Creating fetch URL & setting params
+  fetchWeatherOfLocation(locationName: string): Observable<singleWeather> {
+    let params = new HttpParams()
       .set('q', locationName)
       .set('units', 'metric')
-      .set('appid', environment.apikey);
+      .set('appid', environment.WEATHER_API_KEY);
 
-    return this.http.get<singleWeather>(this.url, { params }).pipe(map((res) => res));
+    return this.http.get<singleWeather>(this.url, { params });
+    // return this.http.get(this.url, { params }).pipe(map((res) => res));
   }
 }

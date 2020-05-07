@@ -17,7 +17,6 @@
 
 .snowflake {
   @include icon();
-
   color: rgb(255, 255, 255);
   filter: drop-shadow(0px 0px 5px rgb(170, 242, 255));
   animation-name: spin-animation;
@@ -38,7 +37,6 @@
 
 .moon {
   @include icon();
-
   color: white;
   filter: drop-shadow(0px 0px 5px white);
   animation-name: moon-tilt;
@@ -59,8 +57,7 @@
 
 .cloud {
   @include icon();
-  color: rgb(69, 143, 212);
-  filter: drop-shadow(0px 0px 5px rgb(69, 143, 212));
+  filter: drop-shadow(0px 0px 5px rgb(183, 220, 255));
   animation-name: cloud-alternate;
   animation-duration: 4s;
   animation-timing-function: ease-in-out;

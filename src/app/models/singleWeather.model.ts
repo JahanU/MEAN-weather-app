@@ -31,6 +31,7 @@ export interface singleWeather {
         sunsetString: string,
         isDayTime: boolean
     }
+    timezone: number,
     weather: [
         {
             id: number,
