@@ -10,8 +10,6 @@ import {
   animate,
   transition,
 } from '@angular/animations';
-import { Observable } from 'rxjs';
-import { publish } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-weather',
@@ -55,11 +53,13 @@ export class SearchWeatherComponent implements OnInit {
     clearInterval(this.timerIntevalId);
     this.timeData = this.weatherData = null;
     this.weatherService.fetchWeatherOfLocation(locationName).subscribe((data) => {
-      console.log(data);
       this.weatherData = data;
-      this.fetchLocationTime(data.coord.lat, data.coord.lon, data);
-      this.setTimeAndDate(data);
+      this.setSunTimes(data);
       this.weatherData.wind.cardinalDirection = this.getCardinalDirection(data.wind.deg);
+
+
+      this.fetchLocationTime(data.coord.lat, data.coord.lon, data);
+
       this.fadeState = true;
     }, (error) => {
       console.log('error: ', error);
@@ -81,20 +81,28 @@ export class SearchWeatherComponent implements OnInit {
   }
 
   // Setters
-  setTimeAndDate(data: singleWeather) {
+  setSunTimes(data: singleWeather) {
     let sunrise = new Date((data.sys.sunrise * 1000));
     sunrise.setSeconds(sunrise.getSeconds() + (data.timezone - 3600));
     this.weatherData.sys.sunriseString = sunrise.toLocaleTimeString()
+
     let sunset = new Date((data.sys.sunset * 1000));
     sunset.setSeconds(sunset.getSeconds() + (data.timezone - 3600));
     this.weatherData.sys.sunsetString = sunset.toLocaleTimeString();
-
   }
 
   setIsDay(weatherData: singleWeather, timeData: singleTimezone) {
+    // Create date obj of current time date, and compare to locations sunset times
     this.timeData.date = new Date(timeData.formatted);
-    let sunset = new Date(weatherData.sys.sunset * 1000);
-    this.timeData.isDay = this.timeData.date < sunset;
+    console.log(this.timeData.date);
+
+    let sunrise = new Date((weatherData.sys.sunrise * 1000));
+    sunrise.setSeconds(sunrise.getSeconds() + (weatherData.timezone - 3600));
+
+    let sunset = new Date((weatherData.sys.sunset * 1000));
+    sunset.setSeconds(sunset.getSeconds() + (weatherData.timezone - 3600));
+
+    return this.timeData.isDay = this.timeData.date > sunrise;
   }
 
   setWidgetColour = (isDay: boolean) =>
@@ -106,12 +114,12 @@ export class SearchWeatherComponent implements OnInit {
 
   // Helper funcs for HTML/Animation
   updateTimeEverySec() {
-    if (this.timeData?.date?.valueOf != null)
-      this.timerIntevalId = setInterval(() => {
-        let time = new Date(this.timeData.date);
-        let updateTime = time.setSeconds(time.getSeconds() + 1);
-        this.timeData.currentTime = new Date(updateTime).toLocaleTimeString();
-      }, 1000);
+    this.timerIntevalId = setInterval(() => {
+      let time = new Date(this.timeData.date);
+      let updateTime = time.setSeconds(time.getSeconds() + 1);
+      this.timeData.currentTime = new Date(updateTime).toTimeString();
+      this.timeData.date = new Date(updateTime);
+    }, 1000);
   }
 
   getFadeState = () => (this.fadeState ? 'show' : 'hide');

@@ -11,7 +11,7 @@
           <i *ngIf="timeData?.isDay == false" class="fa fa-moon moon"> </i>
 
           <i *ngIf="timeData && containsClouds(weatherData.weather[0].description)" class="fa fa-cloud cloud"></i>
-          <i *ngIf="containsSnow(weatherData.weather[0].description)" class="fa fa-snowflake snowflake"></i>
+          <i *ngIf="timeData && containsSnow(weatherData.weather[0].description)" class="fa fa-snowflake snowflake"></i>
 
           <div *ngIf="weatherData && timeData">
             <h5> <b> {{weatherData.name}}, {{weatherData.sys.country}}</b></h5>
