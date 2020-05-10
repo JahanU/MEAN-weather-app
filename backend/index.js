@@ -2,12 +2,14 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+var cors = require('cors')
 require('dotenv/config');
 
 // Import routes
 const locationRoutes = require('./routes/locations');
 
 app.use(bodyParser.json());
+app.use(cors());
 // Middlwares
 app.use('/api/location', locationRoutes); // Whenever api/location endpoint is accessed, use locationRoutes
 

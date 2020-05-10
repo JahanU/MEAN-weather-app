@@ -94,7 +94,6 @@ export class SearchWeatherComponent implements OnInit {
   setIsDay(weatherData: singleWeather, timeData: singleTimezone) {
     // Create date obj of current time date, and compare to locations sunset times
     this.timeData.date = new Date(timeData.formatted);
-    console.log(this.timeData.date);
 
     let sunrise = new Date((weatherData.sys.sunrise * 1000));
     sunrise.setSeconds(sunrise.getSeconds() + (weatherData.timezone - 3600));
@@ -117,7 +116,7 @@ export class SearchWeatherComponent implements OnInit {
     this.timerIntevalId = setInterval(() => {
       let time = new Date(this.timeData.date);
       let updateTime = time.setSeconds(time.getSeconds() + 1);
-      this.timeData.currentTime = new Date(updateTime).toTimeString();
+      this.timeData.currentTime = new Date(updateTime).toLocaleTimeString();
       this.timeData.date = new Date(updateTime);
     }, 1000);
   }
