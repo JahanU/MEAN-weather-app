@@ -51,57 +51,48 @@ export class SearchWeatherComponent implements OnInit {
   fetchLocationData(locationName: string) {
     this.fadeState = false;
     clearInterval(this.timerIntevalId);
-    this.timeData = this.weatherData = null;
+    this.error = this.timeData = this.weatherData = null;
     this.weatherService.fetchWeatherOfLocation(locationName).subscribe((data) => {
+      console.log(data)
       this.weatherData = data;
-      this.setSunTimes(data);
-      this.weatherData.wind.cardinalDirection = this.getCardinalDirection(data.wind.deg);
-
-
-      this.fetchLocationTime(data.coord.lat, data.coord.lon, data);
-
+      this.fetchLocationTimes(data);
+      this.setCardinalDirection(data.wind.deg);
       this.fadeState = true;
     }, (error) => {
-      console.log('error: ', error);
+      console.log('err: ', error);
       this.error = error
-    })
+    });
   }
 
-  fetchLocationTime(lat: number, lon: number, weatherResp: singleWeather) {
-    this.timeService.getTimeOfLocation(lat, lon).subscribe((timeData) => {
+  fetchLocationTimes(weatherResp: singleWeather) {
+    this.timeService.getTimeOfLocation(weatherResp.coord.lat, weatherResp.coord.lon).subscribe((timeData) => {
       this.timeData = timeData;
-      this.setIsDay(weatherResp, timeData);
+      this.setTimes(weatherResp, timeData);
       this.updateTimeEverySec();
     });
   }
+
   // Getters
-  getCardinalDirection(degree: number) {
-    const directions = ['↑ N', '↗ NE', '→ E', '↘ SE', '↓ S', '↙ SW', '← W', '↖ NW',];
-    return directions[Math.round(degree / 45) % 8];
-  }
 
   // Setters
-  setSunTimes(data: singleWeather) {
-    let sunrise = new Date((data.sys.sunrise * 1000));
-    sunrise.setSeconds(sunrise.getSeconds() + (data.timezone - 3600));
-    this.weatherData.sys.sunriseString = sunrise.toLocaleTimeString()
-
-    let sunset = new Date((data.sys.sunset * 1000));
-    sunset.setSeconds(sunset.getSeconds() + (data.timezone - 3600));
-    this.weatherData.sys.sunsetString = sunset.toLocaleTimeString();
-  }
-
-  setIsDay(weatherData: singleWeather, timeData: singleTimezone) {
-    // Create date obj of current time date, and compare to locations sunset times
+  setTimes(weatherData: singleWeather, timeData: singleTimezone) {
+    // Create date obj of current time date, and compare to location timezone/sunrise/sunset times
     this.timeData.date = new Date(timeData.formatted);
 
     let sunrise = new Date((weatherData.sys.sunrise * 1000));
     sunrise.setSeconds(sunrise.getSeconds() + (weatherData.timezone - 3600));
+    this.weatherData.sys.sunriseString = sunrise.toLocaleTimeString()
 
     let sunset = new Date((weatherData.sys.sunset * 1000));
     sunset.setSeconds(sunset.getSeconds() + (weatherData.timezone - 3600));
+    this.weatherData.sys.sunsetString = sunset.toLocaleTimeString();
 
     return this.timeData.isDay = this.timeData.date > sunrise;
+  }
+
+  setCardinalDirection(degree: number) {
+    const directions = ['↑ N', '↗ NE', '→ E', '↘ SE', '↓ S', '↙ SW', '← W', '↖ NW',];
+    return this.weatherData.wind.cardinalDirection = directions[Math.round(degree / 45) % 8];
   }
 
   setWidgetColour = (isDay: boolean) =>

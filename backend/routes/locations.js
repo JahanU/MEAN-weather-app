@@ -1,55 +1,38 @@
 const express = require('express');
 const router = express.Router();
-const Location = require('../models/Location');
+const Location = require('../models/locationModel');
 require('dotenv/config');
 const fetch = require("node-fetch");
+const url = require('url');
 
-
-const url = 'https://api.openweathermap.org/data/2.5/weather';
+const weatherUrl = new URL('https://api.openweathermap.org/data/2.5/weather');
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
-// const TIME_API_KEY: 'GVK27JSUNMGC'
 
 router.get('/', async (req, res) => {
-
     console.log('received query!');
     console.log(req.query);
     try {
-        const response = await fetch(url +
-            '?q=' + req.query.locationName +
-            '&units=' + 'metric' +
-            '&appid=' + WEATHER_API_KEY);
-        console.log(response.url);
+        weatherUrl.searchParams.set('q', req.query.locationName);
+        weatherUrl.searchParams.append('units', 'metric');
+        weatherUrl.searchParams.append('appid', WEATHER_API_KEY);
+        const response = await fetch(weatherUrl.href);
         const resJson = await response.json();
-        res.send(resJson);
+        console.log(resJson);
+        if (resJson.cod == 200) { // Succesful
+            res.send(resJson);
+        }
+        else { // 404 error, city not found
+            res.send(err);
+        }
     }
     catch (err) {
-        res.send(err + ' Invalid location');
+        res.send(err + ' Internal error');
     }
-});
-
-
-router.get('/', (req, res) => {
-    res.send('on home location');
 });
 
 
 router.post('/', async (req, res) => {
 
-    console.log('received query!');
-    console.log(req.query);
-    try {
-        const response = await fetch(url +
-            '?q=' + req.query.locationName +
-            '&units=' + 'metric' +
-            '&appid=' + WEATHER_API_KEY);
-        console.log(response.url);
-        const resJson = await response.json();
-        res.send(resJson);
-    }
-    catch (err) {
-        res.send(err + ' Invalid location');
-    }
-
 });
 
-module.exports = router;
+module.exports = router; // Export this as a module, so we can use it in our index.

@@ -12,4 +12,5 @@ const locationSchema = mongoose.Schema({
     },
 });
 
+// Name of the schema we will save in MongoDB
 module.exports = mongoose.model('locations', locationSchema);

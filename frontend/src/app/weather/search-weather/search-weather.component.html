@@ -26,8 +26,9 @@
         </div>
       </div>
 
-      <div>
-        <h5>{{error}}</h5>
+      <div *ngIf="error">
+        <p> Invalid location. Please try again</p>
+        <!-- <p>{{error}}</p> -->
       </div>
 
     </div>

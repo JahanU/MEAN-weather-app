@@ -9,6 +9,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class WeatherService {
+
   // url = 'https://api.openweathermap.org/data/2.5/weather';
   url = 'http://localhost:3000/api/location';
 
@@ -27,12 +28,12 @@ export class WeatherService {
       .set('locationName', locationName)
 
     console.log('sending request to API URL: ', this.url + params);
-
     return this.http.get<singleWeather>(this.url, { params })
+      .pipe(catchError(this.errorHandler));
   }
 
   errorHandler(error: HttpErrorResponse) {
-    console.log('failure');
+    console.log('network failure');
     console.log(error);
     return throwError(error.message || "server error.");
   }
