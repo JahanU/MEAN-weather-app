@@ -10,25 +10,16 @@ import { catchError } from 'rxjs/operators';
 })
 export class WeatherService {
 
-  // url = 'https://api.openweathermap.org/data/2.5/weather';
-  url = 'http://localhost:3000/api/location';
-
   constructor(private http: HttpClient) { }
 
   fetchWeatherOfLocation(locationName: string): Observable<singleWeather> {
-    // let params = new HttpParams()
-    //   .set('q', locationName)
-    //   .set('units', 'metric')
-    //   .set('appid', environment.WEATHER_API_KEY);
-
-    // return this.http.get<singleWeather>(this.url, { params })
-    //   .pipe(catchError(this.errorHandler));
-
+    // const url = 'https://api.openweathermap.org/data/2.5/weather';
+    const url = 'http://localhost:3000/api/location';
     let params = new HttpParams()
       .set('locationName', locationName)
 
-    console.log('sending request to API URL: ', this.url + params);
-    return this.http.get<singleWeather>(this.url, { params })
+    console.log('sending request to API URL: ', url + params);
+    return this.http.get<singleWeather>(url, { params })
       .pipe(catchError(this.errorHandler));
   }
 
@@ -37,4 +28,13 @@ export class WeatherService {
     console.log(error);
     return throwError(error.message || "server error.");
   }
+
+  // let params = new HttpParams()
+  //   .set('q', locationName)
+  //   .set('units', 'metric')
+  //   .set('appid', environment.WEATHER_API_KEY);
+
+  // return this.http.get<singleWeather>(url, { params })
+  //   .pipe(catchError(this.errorHandler));
+
 }

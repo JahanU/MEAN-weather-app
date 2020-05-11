@@ -47,41 +47,47 @@ export class SearchWeatherComponent implements OnInit {
     this.fetchLocationData('london');
   }
 
-  // Fetchers 
+  // Fetchers ********************************
   fetchLocationData(locationName: string) {
     this.fadeState = false;
     clearInterval(this.timerIntevalId);
     this.error = this.timeData = this.weatherData = null;
     this.weatherService.fetchWeatherOfLocation(locationName).subscribe((data) => {
-      console.log(data)
+      console.log('fetched weather data: ', data);
       this.weatherData = data;
       this.fetchLocationTimes(data);
       this.setCardinalDirection(data.wind.deg);
       this.fadeState = true;
     }, (error) => {
       console.log('err: ', error);
-      this.error = error
+      this.error = error;
     });
   }
 
-  fetchLocationTimes(weatherResp: singleWeather) {
-    this.timeService.getTimeOfLocation(weatherResp.coord.lat, weatherResp.coord.lon).subscribe((timeData) => {
+  fetchLocationTimes(weatherData: singleWeather) {
+    this.timeService.getTimeOfLocation(weatherData.coord.lat, weatherData.coord.lon).subscribe((timeData) => {
+      console.log('fetched location data: ', timeData);
       this.timeData = timeData;
-      this.setTimes(weatherResp, timeData);
+      this.setTimes(weatherData, timeData);
       this.updateTimeEverySec();
-    });
+    }, (error) => {
+      console.log('err: ', error);
+      this.error = error;
+    }
+    );
   }
 
-  // Getters
+  // Getters ********************************
 
-  // Setters
+  // Setters ********************************
   setTimes(weatherData: singleWeather, timeData: singleTimezone) {
     // Create date obj of current time date, and compare to location timezone/sunrise/sunset times
     this.timeData.date = new Date(timeData.formatted);
+    this.timeData.dateString = timeData.formatted.split(' ')[0]; // Get date; 2020-05-11
 
     let sunrise = new Date((weatherData.sys.sunrise * 1000));
     sunrise.setSeconds(sunrise.getSeconds() + (weatherData.timezone - 3600));
-    this.weatherData.sys.sunriseString = sunrise.toLocaleTimeString()
+    this.weatherData.sys.sunriseString = sunrise.toLocaleTimeString();
 
     let sunset = new Date((weatherData.sys.sunset * 1000));
     sunset.setSeconds(sunset.getSeconds() + (weatherData.timezone - 3600));
@@ -102,7 +108,7 @@ export class SearchWeatherComponent implements OnInit {
 
   setCloudColour = (isDay: boolean) => (isDay ? 'white' : 'dodgerBlue');
 
-  // Helper funcs for HTML/Animation
+  // Helper funcs for HTML/Animation ********************************
   updateTimeEverySec() {
     this.timerIntevalId = setInterval(() => {
       let time = new Date(this.timeData.date);

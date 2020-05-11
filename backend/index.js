@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require('express'); // Web server
 const app = express();
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
+const mongoose = require('mongoose'); // Connect to DB
+const bodyParser = require('body-parser'); // Parse body data; JSON data
+const morgan = require('morgan'); // Log all API calls
 var cors = require('cors')
 require('dotenv/config');
 
@@ -12,9 +12,11 @@ app.use(morgan('dev'));
 
 // Import routes
 const locationRoutes = require('./routes/locations');
+const dateAndTimeRoutes = require('./routes/dateAndTime');
 
 // Middlwares
 app.use('/api/location', locationRoutes); // Whenever api/location endpoint is accessed, use locationRoutes
+app.use('/api/time-date', dateAndTimeRoutes); // Whenever api/location endpoint is accessed, use locationRoutes
 
 // Routes
 app.get('/', (req, res) => {
