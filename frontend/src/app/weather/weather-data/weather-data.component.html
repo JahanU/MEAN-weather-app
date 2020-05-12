@@ -1,15 +1,7 @@
-<agm-map [latitude]="weatherData?.coord?.lat" [longitude]="weatherData?.coord?.lon">
-  <agm-marker [latitude]="weatherData?.coord?.lat" [longitude]="weatherData?.coord?.lon"></agm-marker>
-</agm-map>
-
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <mat-form-field>
-        <mat-label>Enter a location</mat-label>
-        <input #box matInput placeholder=" Ex. London" (keyup.enter)="fetchLocationData(box.value)">
-      </mat-form-field>
-      <div class="weatherWidget" [@fadeTrigger]="getFadeState()" [style.background]="setWidgetColour(timeData?.isDay)">
+      <div class="weatherWidget" [style.background]="setWidgetColour(timeData?.isDay)">
         <div *ngIf="weatherData && timeData" class="weatherWidgetRow">
           <i *ngIf="timeData?.isDay == true" class="fa fa-sun sun"> </i>
           <i *ngIf="timeData?.isDay == false" class="fa fa-moon moon"> </i>
@@ -30,10 +22,6 @@
         </div>
       </div>
 
-      <div *ngIf="error">
-        <p> Invalid location. Please try again</p>
-        <!-- <p>{{error}}</p> -->
-      </div>
 
     </div>
   </div>

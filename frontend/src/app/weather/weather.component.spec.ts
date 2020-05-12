@@ -41,9 +41,9 @@ describe('WeatherComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have getWeather function', () => {
-    expect(weatherService.getWeatherData).toBeTruthy();
-  });
+  // it('should have getWeather function', () => {
+  //   expect(weatherService.getWeatherData).toBeTruthy();
+  // });
 
 
   // it('should get data from weather API', async(() => {
@@ -63,8 +63,8 @@ describe('WeatherComponent', () => {
   //   });
   // }));
 
-  it('Should show japan', () => {
-    expect(component.applyFilter('japan')).toBe('japan');
-    expect(component.applyFilter('JAPAN')).toBe('japan');
-  });
+  // it('Should show japan', () => {
+  //   expect(component.applyFilter('japan')).toBe('japan');
+  //   expect(component.applyFilter('JAPAN')).toBe('japan');
+  // });
 });

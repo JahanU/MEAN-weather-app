@@ -1,1 +1,16 @@
-  <app-search-weather></app-search-weather>
+<mat-form-field>
+    <mat-label>Enter a location</mat-label>
+    <input #box matInput placeholder=" Ex. London" (keyup.enter)="fetchLocationData(box.value)">
+</mat-form-field>
+
+<div [@fadeTrigger]="getFadeState()">
+    <app-weather-data [weatherData]="weatherData" [timeData]="timeData">
+    </app-weather-data>
+    <hr>
+    <app-weather-map [weatherData]="weatherData">
+    </app-weather-map>
+</div>
+<div *ngIf="errorMessage">
+    <p> Invalid location. Please try again</p>
+    <p>{{errorMessage}}</p>
+</div>

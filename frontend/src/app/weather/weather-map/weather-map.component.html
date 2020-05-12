@@ -1,0 +1,5 @@
+<div *ngIf="weatherData">
+    <agm-map [latitude]="weatherData.coord.lat" [longitude]="weatherData.coord.lon">
+        <agm-marker [latitude]="weatherData.coord.lat" [longitude]="weatherData.coord.lon"></agm-marker>
+    </agm-map>
+</div>

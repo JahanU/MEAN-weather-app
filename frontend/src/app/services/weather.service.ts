@@ -13,7 +13,6 @@ export class WeatherService {
   constructor(private http: HttpClient) { }
 
   fetchWeatherOfLocation(locationName: string): Observable<singleWeather> {
-    // const url = 'https://api.openweathermap.org/data/2.5/weather';
     const url = 'http://localhost:3000/api/location';
     let params = new HttpParams()
       .set('locationName', locationName)
@@ -24,11 +23,11 @@ export class WeatherService {
   }
 
   errorHandler(error: HttpErrorResponse) {
-    console.log('network failure');
-    console.log(error);
+    console.log('weather.service / network failure: ', error);
     return throwError(error.message || "server error.");
   }
 
+  // const url = 'https://api.openweathermap.org/data/2.5/weather';
   // let params = new HttpParams()
   //   .set('q', locationName)
   //   .set('units', 'metric')

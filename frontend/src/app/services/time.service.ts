@@ -19,16 +19,15 @@ export class TimeService {
             .set('lng', lng.toString())
 
         console.log('sending request to API URL: ', url + params);
-
         return this.http.get<singleTimezone>(url, { params })
             .pipe(catchError(this.errorHandler));
     }
 
     errorHandler(error: HttpErrorResponse) {
-        console.log('network failure');
-        console.log(error);
+        console.log('time.service / network failure: ', error);
         return throwError(error.message || "server error.");
     }
+
     /*
     ****************************************************************
     Not using Node.JS
