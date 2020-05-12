@@ -14,3 +14,9 @@
     <p> Invalid location. Please try again</p>
     <p>{{errorMessage}}</p>
 </div>
+
+<ul>
+    <li *ngFor="let location of locationFreqData">
+        {{ location.locationName }}, {{ location.date}}
+    </li>
+</ul>
