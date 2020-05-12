@@ -38,6 +38,9 @@ export class SearchWeatherComponent implements OnInit {
   timerIntevalId; // Reset the timer when searching new location
   error: string;
 
+  lat = 51.51;
+  lng = -0.13
+
   constructor(
     private weatherService: WeatherService,
     private timeService: TimeService

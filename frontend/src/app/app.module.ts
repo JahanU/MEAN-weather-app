@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 import { WeatherComponent } from './weather/weather.component';
 import { MaterialModule } from './material.module';
 import { SearchWeatherComponent } from './weather/search-weather/search-weather.component';
-
+import { AgmCoreModule } from '@agm/core';
+import { environment } from 'src/environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,9 @@ import { SearchWeatherComponent } from './weather/search-weather/search-weather.
     HttpClientModule,
     MaterialModule,
     BrowserAnimationsModule,
+    AgmCoreModule.forRoot({
+      apiKey: environment.GOOGLE_API_KEY
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

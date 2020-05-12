@@ -12,9 +12,11 @@ import { Observable } from 'rxjs';
 })
 export class WeatherComponent implements OnInit {
 
-  // public weatherData: Observable<singleWeather[]>;
+  public weatherData: singleWeather;
 
   constructor(private weatherService: WeatherService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+  }
 }
