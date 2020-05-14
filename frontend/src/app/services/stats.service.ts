@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { locationName } from '../models/locationName.model';
+import { location } from '../models/location.model';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -12,11 +12,10 @@ export class StatsService {
 
     constructor(private http: HttpClient) { }
 
-    fetchAllSearched(): Observable<locationName[]> { // locationFreqData
+    fetchAllSearched(): Observable<location[]> { // locationFreqData
         const url = 'http://localhost:3000/api/location/all';
 
-        console.log('sending request to API URL: ', url);
-        return this.http.get<locationName[]>(url)
+        return this.http.get<location[]>(url)
             .pipe(catchError(this.errorHandler));
     }
 

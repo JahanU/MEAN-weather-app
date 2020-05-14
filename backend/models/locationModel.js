@@ -6,10 +6,10 @@ const locationSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    date: {
-        type: Date,
-        default: Date.now
-    },
+    count: {
+        type: Number,
+        default: 1,
+    }
 });
 
 // Name of the schema we will save in MongoDB

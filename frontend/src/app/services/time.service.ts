@@ -18,7 +18,6 @@ export class TimeService {
             .set('lat', lat.toString())
             .set('lng', lng.toString())
 
-        console.log('sending request to API URL: ', url + params);
         return this.http.get<singleTimezone>(url, { params })
             .pipe(catchError(this.errorHandler));
     }

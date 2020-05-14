@@ -10,14 +10,18 @@ import { WeatherDataComponent } from './weather/weather-data/weather-data.compon
 import { AgmCoreModule } from '@agm/core';
 import { environment } from 'src/environments/environment';
 import { WeatherMapComponent } from './weather/weather-map/weather-map.component';
+import { WeatherTableComponent } from './weather/weather-table/weather-table/weather-table.component';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
     WeatherComponent,
     WeatherDataComponent,
-    WeatherMapComponent
+    WeatherMapComponent,
+    WeatherTableComponent
   ],
   imports: [
+    MatNativeDateModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

@@ -17,7 +17,6 @@ export class WeatherService {
     let params = new HttpParams()
       .set('locationName', locationName)
 
-    console.log('sending request to API URL: ', url + params);
     return this.http.get<singleWeather>(url, { params })
       .pipe(catchError(this.errorHandler));
   }

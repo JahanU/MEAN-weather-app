@@ -3,7 +3,7 @@ import { WeatherService } from '../services/weather.service';
 import { TimeService } from '../services/time.service';
 import { singleTimezone } from '../models/singleTimezone.model';
 import { singleWeather } from '../models/singleWeather.model';
-import { locationName } from '../models/locationName.model';
+import { location } from '../models/location.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { StatsService } from '../services/stats.service';
 
@@ -30,7 +30,7 @@ export class WeatherComponent implements OnInit {
 
   public weatherData: singleWeather;
   public timeData: singleTimezone;
-  public locationFreqData: locationName[];
+  public locationFreqData: location[];
   public errorMessage: string;
   public fadeState: boolean;
 
@@ -42,13 +42,12 @@ export class WeatherComponent implements OnInit {
 
   ngOnInit() {
     this.fetchLocationData('london');
-    this.fetchSearchedLocations();
   }
 
   fetchLocationData(locationName: string) {
     console.log('fetching...');
     this.reset();
-    this.weatherService.fetchWeatherOfLocation(locationName).subscribe((data) => {
+    this.weatherService.fetchWeatherOfLocation(locationName.toLowerCase()).subscribe((data) => {
       this.weatherData = data;
       this.fetchLocationTimes(data);
       this.fetchSearchedLocations();
@@ -70,9 +69,11 @@ export class WeatherComponent implements OnInit {
 
   fetchSearchedLocations() {
     this.statsService.fetchAllSearched().subscribe((data) => {
-      console.log('ANGULAR ALL DATA: ', data);
       this.locationFreqData = data;
-    })
+    }, (error) => {
+      console.log('err: ', error);
+      this.errorMessage = error;
+    });
   }
 
   getFadeState = () => (this.fadeState ? 'show' : 'hide');
