@@ -8,7 +8,6 @@ const TIME_API_KEY = process.env.TIME_API_KEY;
 
 router.get('/', async (req, res) => {
     console.log('received query at time');
-    console.log(req.query);
     try {
         weatherUrl.searchParams.set('key', TIME_API_KEY);
         weatherUrl.searchParams.set('format', 'json');
@@ -18,7 +17,6 @@ router.get('/', async (req, res) => {
 
         const response = await fetch(weatherUrl.href);
         const resJson = await response.json();
-        console.log(resJson);
         if (resJson.status == 'OK') { // Succesful
             res.send(resJson);
         }

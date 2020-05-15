@@ -1,28 +1,28 @@
-<div class="container">
+<!-- <div class="container">
   <div class="row">
-    <div class="col-12">
-      <div class="weatherWidget" [style.background]="setWidgetColour(timeData?.isDay)">
-        <div *ngIf="weatherData && timeData" class="weatherWidgetRow">
-          <i *ngIf="timeData?.isDay == true" class="fa fa-sun sun"> </i>
-          <i *ngIf="timeData?.isDay == false" class="fa fa-moon moon"> </i>
+    <div class="col-12"> -->
+<div class="weatherWidget" [style.background]="setWidgetColour(timeData?.isDay)">
+  <div *ngIf="weatherData && timeData" class="weatherWidgetRow">
+    <i *ngIf="timeData?.isDay == true" class="fa fa-sun sun"> </i>
+    <i *ngIf="timeData?.isDay == false" class="fa fa-moon moon"> </i>
 
-          <i *ngIf="timeData && containsClouds(weatherData.weather[0].description)" class="fa fa-cloud cloud"></i>
-          <i *ngIf="timeData && containsSnow(weatherData.weather[0].description)" class="fa fa-snowflake snowflake"></i>
+    <i *ngIf="timeData && containsClouds(weatherData.weather[0].description)" class="fa fa-cloud cloud"></i>
+    <i *ngIf="timeData && containsSnow(weatherData.weather[0].description)" class="fa fa-snowflake snowflake"></i>
 
-          <div *ngIf="weatherData && timeData">
-            <h5> <b> {{weatherData.name}}, {{weatherData.sys.country}}</b></h5>
-            <p> <b> {{timeData.dateString}}, {{timeData.currentTime || '00,00,00'}} </b></p>
-            <p> <b> {{weatherData.weather[0].description}} </b></p>
-            <p> Feels like: <b> {{weatherData.main.feels_like}}°C </b></p>
-            <p> Humidty: <b> {{weatherData.main.humidity}}%</b> </p>
-            <p> Wind speed: <b> {{weatherData.wind.speed}}mph</b>,<b> {{weatherData.wind.cardinalDirection}}</b> </p>
-            <p>Sunrise at: <b> {{weatherData.sys.sunriseString}}</b>, sunset at:<b> {{weatherData.sys.sunsetString}}</b>
-            </p>
-          </div>
-        </div>
-      </div>
-
-
+    <div *ngIf="weatherData && timeData">
+      <h5> <b> {{weatherData.name}}, {{weatherData.sys.country}}</b></h5>
+      <p> <b> {{timeData.dateString}}, {{timeData.currentTime || '00,00,00'}} </b></p>
+      <p> <b> {{weatherData.weather[0].description}} </b></p>
+      <p> Feels like: <b> {{weatherData.main.feels_like}}°C </b></p>
+      <p> Humidty: <b> {{weatherData.main.humidity}}%</b> </p>
+      <p> Wind speed: <b> {{weatherData.wind.speed}}mph</b>,<b> {{weatherData.wind.cardinalDirection}}</b> </p>
+      <p>Sunrise at: <b> {{weatherData.sys.sunriseString}}</b>, sunset at:<b> {{weatherData.sys.sunsetString}}</b>
+      </p>
     </div>
   </div>
 </div>
+
+<!-- 
+    </div>
+  </div>
+</div> -->

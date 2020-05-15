@@ -1,4 +1,7 @@
 agm-map {
     height: 400px;
     width: 100%;
+    display: block;
+    border-radius: 10px;
+    mask-image: linear-gradient(white, black);
 }

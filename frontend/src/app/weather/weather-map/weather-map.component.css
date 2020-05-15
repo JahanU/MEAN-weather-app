@@ -1,5 +1,11 @@
 agm-map {
   height: 400px;
   width: 100%;
+  display: block;
+  border-radius: 10px;
+  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(white), to(black));
+  -webkit-mask-image: linear-gradient(white, black);
+          mask-image: -webkit-gradient(linear, left top, left bottom, from(white), to(black));
+          mask-image: linear-gradient(white, black);
 }
 /*# sourceMappingURL=weather-map.component.css.map */

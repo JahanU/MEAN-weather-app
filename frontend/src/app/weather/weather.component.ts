@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { TimeService } from '../services/time.service';
 import { singleTimezone } from '../models/singleTimezone.model';
@@ -28,6 +28,7 @@ import { StatsService } from '../services/stats.service';
 })
 export class WeatherComponent implements OnInit {
 
+  // Will be accessible by children component
   public weatherData: singleWeather;
   public timeData: singleTimezone;
   public locationFreqData: location[];
@@ -41,13 +42,25 @@ export class WeatherComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.fetchLocationData('london');
+    this.fetchLocationByName('london');
   }
 
-  fetchLocationData(locationName: string) {
-    console.log('fetching...');
+  fetchLocationByCoords(event) {
     this.reset();
-    this.weatherService.fetchWeatherOfLocation(locationName.toLowerCase()).subscribe((data) => {
+    const { lat, lng } = event; // Event from click on map
+    this.weatherService.fetchWeatherByCoords(lat, lng).subscribe((data) => {
+      this.weatherData = data;
+      this.fetchLocationTimes(data);
+      this.fetchSearchedLocations();
+    }, (error) => {
+      console.log('err: ', error);
+      this.errorMessage = error;
+    });
+  }
+
+  fetchLocationByName(locationName: string) {
+    this.reset();
+    this.weatherService.fetchWeatherByName(locationName.toLowerCase()).subscribe((data) => {
       this.weatherData = data;
       this.fetchLocationTimes(data);
       this.fetchSearchedLocations();

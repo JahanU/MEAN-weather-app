@@ -4,20 +4,30 @@ const Location = require('../models/locationModel'); // Allows us to save to DB
 require('dotenv/config');
 const fetch = require("node-fetch");
 
-const weatherUrl = new URL('https://api.openweathermap.org/data/2.5/weather');
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 
 
+/* Fetch location via name or lat/long */
 router.get('/', async (req, res) => {
-    console.log('GET: received query at location');
+    const weatherUrl = new URL('https://api.openweathermap.org/data/2.5/weather');
+
+    console.log('GET (VIA NAME / LAT & LON): received query at location');
     try {
-        weatherUrl.searchParams.set('q', req.query.locationName);
-        weatherUrl.searchParams.append('units', 'metric');
-        weatherUrl.searchParams.append('appid', WEATHER_API_KEY);
+        if (req.query.locationName) {
+            weatherUrl.searchParams.set('q', req.query.locationName);
+        }
+        else {
+            weatherUrl.searchParams.set('lat', req.query.lat);
+            weatherUrl.searchParams.set('lon', req.query.lon);
+        }
+        weatherUrl.searchParams.set('units', 'metric');
+        weatherUrl.searchParams.set('appid', WEATHER_API_KEY);
+
         const response = await fetch(weatherUrl.href);
         const resJson = await response.json();
+        console.log(resJson);
         if (resJson.cod == 200) { // Succesful
-            await saveOrUpdateToDB(req.query.locationName);
+            await saveOrUpdateToDB(resJson.name);
             res.send(resJson);
         }
         else { // 404 error, city not found
@@ -31,7 +41,6 @@ router.get('/', async (req, res) => {
 
 var saveOrUpdateToDB = async (locationName) => {
     const location = new Location({ locationName: locationName });
-
     try {
         const findLocation = await Location.find({ locationName: locationName });
 

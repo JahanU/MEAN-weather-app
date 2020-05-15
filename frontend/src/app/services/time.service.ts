@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { singleTimezone } from '../models/singleTimezone.model';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -12,11 +12,11 @@ export class TimeService {
 
     constructor(private http: HttpClient) { }
 
-    getTimeOfLocation(lat: number, lng: number) {
+    getTimeOfLocation(lat: number, lng: number): Observable<singleTimezone> {
         const url = 'http://localhost:3000/api/time-date';
         let params = new HttpParams()
             .set('lat', lat.toString())
-            .set('lng', lng.toString())
+            .append('lng', lng.toString())
 
         return this.http.get<singleTimezone>(url, { params })
             .pipe(catchError(this.errorHandler));

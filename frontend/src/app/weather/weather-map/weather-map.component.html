@@ -1,5 +1,6 @@
 <div *ngIf="weatherData">
-    <agm-map [latitude]="weatherData.coord.lat" [longitude]="weatherData.coord.lon">
+    <agm-map [latitude]="weatherData.coord.lat" [longitude]="weatherData.coord.lon" [styles]="setTheme()"
+        (mapClick)="outputClickLocation($event)">
         <agm-marker [latitude]="weatherData.coord.lat" [longitude]="weatherData.coord.lon"></agm-marker>
     </agm-map>
 </div>

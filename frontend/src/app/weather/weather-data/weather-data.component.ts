@@ -20,17 +20,12 @@ export class WeatherDataComponent implements OnInit {
   ngOnInit(): void { }
 
   ngOnChanges(changes: OnChanges): void {
-
-    // console.log('changes: ', changes);
-    // only run when property "weatherData & timeData" have changed
     clearInterval(this.timerIntevalId);
     if (this.weatherData && this.timeData) {
-      console.log('data has loaded!: ');
       this.setCardinalDirection(this.weatherData.wind.deg);
       this.setTimes();
       this.updateTimeEverySec();
     }
-
   }
 
   // Setters ********************************
