@@ -21,7 +21,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
 </table>
-<mat-paginator #paginator [length]="dataSource?.data.length" [pageSizeOptions]="[10]">
+<mat-paginator #paginator [length]="dataSource?.data.length" [pageSizeOptions]="[10, 20]">
 </mat-paginator>
 
 <!-- <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="10"
