@@ -1,10 +1,17 @@
+This project was created to further develop my skills and to become more familar and comfortable with the MEAN (MongoDB, Express, Angular, Node) stack.
+
+Some implementation choices were done to incoperate as much of the stack as possible.
+
+
+
 # MEAN Stack Weather App
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.3.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Frontend: Run `ng serve`/`npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Backend: `npm start`
 
 ## Code scaffolding
 
