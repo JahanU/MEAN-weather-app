@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { singleWeather } from 'src/app/models/singleWeather.model';
 import { singleTimezone } from 'src/app/models/singleTimezone.model';
+
 @Component({
   selector: 'app-weather-map',
   templateUrl: './weather-map.component.html',
@@ -12,7 +13,7 @@ export class WeatherMapComponent implements OnInit {
   @Input() timeData: singleTimezone;
 
   // Emit data for weather.component 
-  @Output() outputClickCoords = new EventEmitter<Event>();
+  @Output() outputClickCoords = new EventEmitter<Coordinates>();
 
 
   constructor() { }

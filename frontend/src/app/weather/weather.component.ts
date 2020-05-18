@@ -42,12 +42,21 @@ export class WeatherComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.fetchLocationByName('london');
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position: Position) => {
+        console.log('got location: ', position.coords);
+        const coords = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        this.fetchLocationByCoords(coords);
+      });
+    }
   }
 
-  fetchLocationByCoords(event) {
+  fetchLocationByCoords(coords) {
     this.reset();
-    const { lat, lng } = event; // Event from click on map
+    const { lat, lng } = coords; // Event from click on map
     this.weatherService.fetchWeatherByCoords(lat, lng).subscribe((data) => {
       this.weatherData = data;
       this.fetchLocationTimes(data);
