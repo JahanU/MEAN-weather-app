@@ -69,5 +69,6 @@ export class WeatherDataComponent implements OnInit {
 
   containsClouds = (feelsLike: string) => feelsLike.includes('cloud');
   containsSnow = (feelsLike: string) => feelsLike.includes('snow');
+  containsRain = (feelsLike: string) => feelsLike.includes('rain');
 
 }

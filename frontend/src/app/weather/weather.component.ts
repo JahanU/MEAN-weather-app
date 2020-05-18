@@ -50,7 +50,11 @@ export class WeatherComponent implements OnInit {
           lng: position.coords.longitude
         };
         this.fetchLocationByCoords(coords);
-      });
+      }, (error) => { // Location access denied 
+        console.log(error);
+        this.fetchLocationByName('GuelpH'); // Default location search
+      }
+      );
     }
   }
 
@@ -60,7 +64,7 @@ export class WeatherComponent implements OnInit {
     this.weatherService.fetchWeatherByCoords(lat, lng).subscribe((data) => {
       this.weatherData = data;
       this.fetchLocationTimes(data);
-      this.fetchSearchedLocations();
+      this.fetchAllSearchedLocations();
     }, (error) => {
       console.log('err: ', error);
       this.errorMessage = error;
@@ -72,7 +76,7 @@ export class WeatherComponent implements OnInit {
     this.weatherService.fetchWeatherByName(locationName.toLowerCase()).subscribe((data) => {
       this.weatherData = data;
       this.fetchLocationTimes(data);
-      this.fetchSearchedLocations();
+      this.fetchAllSearchedLocations();
     }, (error) => {
       console.log('err: ', error);
       this.errorMessage = error;
@@ -89,7 +93,7 @@ export class WeatherComponent implements OnInit {
     });
   }
 
-  fetchSearchedLocations() {
+  fetchAllSearchedLocations() {
     this.statsService.fetchAllSearched().subscribe((data) => {
       this.locationFreqData = data;
     }, (error) => {

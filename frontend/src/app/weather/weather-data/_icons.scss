@@ -1,5 +1,5 @@
 @mixin icon {
-  font-size: 48px;
+  font-size: 60px;
   margin: 15px 0px 15px 0px;
   animation-iteration-count: infinite;
 }
@@ -7,6 +7,7 @@
 .sun {
   @include icon();
   color: yellow;
+  margin: 15px 0px 15px 0px;
   filter: drop-shadow(0px 0px 5px orange);
   animation-name: spin-animation;
   animation-duration: 9s;
@@ -59,13 +60,13 @@
   @include icon();
   color: white;
   filter: drop-shadow(0px 0px 5px, LightSkyBlue);
-  animation-name: cloud-alternate;
+  animation-name: alternate;
   animation-duration: 4s;
   animation-timing-function: ease-in-out;
   animation-direction: alternate;
 }
 
-@keyframes cloud-alternate {
+@keyframes alternate {
   from {
     transform: translateX(-30px)
   }
@@ -73,4 +74,14 @@
   to {
     transform: translateX(0px)
   }
+}
+
+.rain {
+  @include icon();
+  color: white;
+  filter: drop-shadow(0px 0px 5px, LightSkyBlue);
+  animation-name: alternate;
+  animation-duration: 4s;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
 }

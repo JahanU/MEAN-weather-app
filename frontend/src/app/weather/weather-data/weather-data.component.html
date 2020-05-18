@@ -1,11 +1,9 @@
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-12"> -->
 <div class="weatherWidget" [style.background]="setWidgetColour(timeData?.isDay)">
   <div *ngIf="weatherData && timeData" class="weatherWidgetRow">
     <i *ngIf="timeData?.isDay == true" class="fa fa-sun sun"> </i>
     <i *ngIf="timeData?.isDay == false" class="fa fa-moon moon"> </i>
 
+    <i *ngIf="timeData && containsRain(weatherData.weather[0].description)" class="fa fa-cloud-showers-heavy rain"></i>
     <i *ngIf="timeData && containsClouds(weatherData.weather[0].description)" class="fa fa-cloud cloud"></i>
     <i *ngIf="timeData && containsSnow(weatherData.weather[0].description)" class="fa fa-snowflake snowflake"></i>
 
@@ -21,8 +19,3 @@
     </div>
   </div>
 </div>
-
-<!-- 
-    </div>
-  </div>
-</div> -->

@@ -1,9 +1,10 @@
 .sun {
-  font-size: 48px;
+  font-size: 60px;
   margin: 15px 0px 15px 0px;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
   color: yellow;
+  margin: 15px 0px 15px 0px;
   -webkit-filter: drop-shadow(0px 0px 5px orange);
           filter: drop-shadow(0px 0px 5px orange);
   -webkit-animation-name: spin-animation;
@@ -18,7 +19,7 @@
 }
 
 .snowflake {
-  font-size: 48px;
+  font-size: 60px;
   margin: 15px 0px 15px 0px;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
@@ -58,7 +59,7 @@
 }
 
 .moon {
-  font-size: 48px;
+  font-size: 60px;
   margin: 15px 0px 15px 0px;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
@@ -98,15 +99,15 @@
 }
 
 .cloud {
-  font-size: 48px;
+  font-size: 60px;
   margin: 15px 0px 15px 0px;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
   color: white;
   -webkit-filter: drop-shadow(0px 0px 5px, LightSkyBlue);
           filter: drop-shadow(0px 0px 5px, LightSkyBlue);
-  -webkit-animation-name: cloud-alternate;
-          animation-name: cloud-alternate;
+  -webkit-animation-name: alternate;
+          animation-name: alternate;
   -webkit-animation-duration: 4s;
           animation-duration: 4s;
   -webkit-animation-timing-function: ease-in-out;
@@ -115,7 +116,7 @@
           animation-direction: alternate;
 }
 
-@-webkit-keyframes cloud-alternate {
+@-webkit-keyframes alternate {
   from {
     -webkit-transform: translateX(-30px);
             transform: translateX(-30px);
@@ -126,7 +127,7 @@
   }
 }
 
-@keyframes cloud-alternate {
+@keyframes alternate {
   from {
     -webkit-transform: translateX(-30px);
             transform: translateX(-30px);
@@ -135,6 +136,24 @@
     -webkit-transform: translateX(0px);
             transform: translateX(0px);
   }
+}
+
+.rain {
+  font-size: 60px;
+  margin: 15px 0px 15px 0px;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  color: white;
+  -webkit-filter: drop-shadow(0px 0px 5px, LightSkyBlue);
+          filter: drop-shadow(0px 0px 5px, LightSkyBlue);
+  -webkit-animation-name: alternate;
+          animation-name: alternate;
+  -webkit-animation-duration: 4s;
+          animation-duration: 4s;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
 }
 
 .weatherWidget {
