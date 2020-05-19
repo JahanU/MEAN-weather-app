@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { WeatherComponent } from './weather.component';
 import { WeatherService } from '../services/weather.service';
 import { DebugElement, inject } from '@angular/core';
+import { of } from 'rxjs';
 
 
 describe('WeatherComponent', () => {
@@ -13,11 +14,59 @@ describe('WeatherComponent', () => {
   let fixture: ComponentFixture<WeatherComponent>; // Test environment for component
   let de: DebugElement;
 
+  let serviceStub: any;
+
   beforeEach(async(() => {
+
+    const weatherStub = {
+      id: '3333167',
+      name: 'Liverpool',
+      coord: {
+        lat: 53.42,
+        lon: -2.91
+      },
+      main: {
+        feels_like: 9.91,
+        humidity: 77,
+        pressure: 1021,
+        temp: 14.98,
+        temp_max: 16.67,
+        temp_min: 13.89
+      },
+      dt: 1,
+      wind: {
+        speed: 7.7,
+        deg: 240,
+        cardinalDirection: '↙ SW'
+      },
+      clouds: {
+        all: 10
+      },
+      sys: {
+        country: 'GB',
+        sunrise: 1589774780,
+        sunset: 1589832605,
+        sunriseString: '5:06:20 AM',
+        sunsetString: '9:10:05 PM',
+        isDayTime: true
+      },
+      timezone: 3600,
+      weather: [
+        {
+          id: 333,
+          main: 'Clouds',
+          description: '"overcast clouds"',
+        }
+      ]
+    }
+    serviceStub = {
+      fetchWeatherByName: () => of(weatherStub),
+    };
+
     TestBed.configureTestingModule({
       declarations: [WeatherComponent],
       imports: [HttpClientTestingModule],
-      providers: [WeatherService]
+      providers: [{ provide: WeatherService, useValue: serviceStub }] // Tells service to use stub instead of live data
     })
       .compileComponents();
   }));
@@ -26,45 +75,19 @@ describe('WeatherComponent', () => {
     fixture = TestBed.createComponent(WeatherComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    weatherService = TestBed.get(WeatherService);
-    httpMock = TestBed.get(HttpTestingController);
   });
 
-  /*
-  I have tried several attempts to test observables but I have had no luck unfortunately 
-  What I would have done is:
-  - Load data into DataSouce
-  - Apply the filter on (i.e. by entering 'Cambridge')
-  - Check if the result of the filtered DataSouce has been changed and correlates to the input 
-  */
-  it('should create', () => {
+  it('Should create', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should have getWeather function', () => {
-  //   expect(weatherService.getWeatherData).toBeTruthy();
-  // });
+  it('API STUB Test', () => {
+    component.weatherDataObs.subscribe((data) => {
+      console.log('Stub: ', data);
+      expect(component).toBeDefined();
+      expect(data.name).toContain('Liverpool');
+    })
+  });
 
 
-  // it('should get data from weather API', async(() => {
-  //   weatherService.getWeatherByName().subscribe(result => expect(result.length).toBeGreaterThan(0));
-  // }));
-
-  // it('should get data from weather API', async () => {
-  //   weatherService.getWeatherByName().subscribe(result =>
-  //     expect(result.length).toBeGreaterThan(0)
-  //   );
-  // });
-
-  // it('should get data from weather API', async(() => {
-  //   return weatherService.getWeatherByName().toPromise().then((result) => {
-  //     console.log(result)
-  //     expect(result.length).toBeGreaterThan(0);
-  //   });
-  // }));
-
-  // it('Should show japan', () => {
-  //   expect(component.applyFilter('japan')).toBe('japan');
-  //   expect(component.applyFilter('JAPAN')).toBe('japan');
-  // });
 });

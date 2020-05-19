@@ -2,14 +2,12 @@ import { Component, OnInit, Input, Output, OnChanges } from '@angular/core';
 import { singleWeather } from 'src/app/models/singleWeather.model';
 import { singleTimezone } from 'src/app/models/singleTimezone.model';
 
-
 @Component({
   selector: 'app-weather-data',
   templateUrl: './weather-data.component.html',
   styleUrls: ['./weather-data.component.css']
 })
 export class WeatherDataComponent implements OnInit {
-
   @Input() weatherData: singleWeather;
   @Input() timeData: singleTimezone;
   showErrorMessage = false;
@@ -22,8 +20,8 @@ export class WeatherDataComponent implements OnInit {
   ngOnChanges(changes: OnChanges): void {
     clearInterval(this.timerIntevalId);
     if (this.weatherData && this.timeData) {
-      this.setCardinalDirection(this.weatherData.wind.deg);
-      this.setTimes();
+      this.weatherData.wind.cardinalDirection = this.setCardinalDirection(this.weatherData.wind.deg);
+      this.timeData.isDay = this.setTimes();
       this.updateTimeEverySec();
     }
   }
@@ -42,12 +40,12 @@ export class WeatherDataComponent implements OnInit {
     sunset.setSeconds(sunset.getSeconds() + (this.weatherData.timezone - 3600));
     this.weatherData.sys.sunsetString = sunset.toLocaleTimeString();
 
-    return this.timeData.isDay = this.timeData.date > sunrise;
+    return this.timeData.date >= sunrise && this.timeData.date <= sunset;
   }
 
-  setCardinalDirection(degree: number) {
-    const directions = ['↑ N', '↗ NE', '→ E', '↘ SE', '↓ S', '↙ SW', '← W', '↖ NW',];
-    return this.weatherData.wind.cardinalDirection = directions[Math.round(degree / 45) % 8];
+  setCardinalDirection(degree: number): string {
+    const directions = ['↑ N', '↗ NE', '→ E', '↘ SE', '↓ S', '↙ SW', '← W', '↖ NW'];
+    return directions[Math.round(degree / 45) % 8];
   }
 
   setWidgetColour = (isDay: boolean) =>
@@ -67,8 +65,8 @@ export class WeatherDataComponent implements OnInit {
     }, 1000);
   }
 
-  containsClouds = (feelsLike: string) => feelsLike.includes('cloud');
-  containsSnow = (feelsLike: string) => feelsLike.includes('snow');
-  containsRain = (feelsLike: string) => feelsLike.includes('rain');
+  containsClouds = (feelsLike: string) => feelsLike.toLowerCase().includes('cloud');
+  containsSnow = (feelsLike: string) => feelsLike.toLowerCase().includes('snow');
+  containsRain = (feelsLike: string) => feelsLike.toLowerCase().includes('rain');
 
 }

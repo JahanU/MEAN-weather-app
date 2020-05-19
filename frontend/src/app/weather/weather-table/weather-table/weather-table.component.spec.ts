@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { WeatherTableComponent } from './weather-table.component';
 
 describe('WeatherTableComponent', () => {
@@ -8,9 +7,9 @@ describe('WeatherTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WeatherTableComponent ]
+      declarations: [WeatherTableComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

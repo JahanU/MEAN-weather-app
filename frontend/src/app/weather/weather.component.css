@@ -1,1 +1,7 @@
 /* Structure */
+
+mat-toolbar {
+    width: 100%;
+    height: 90px;
+    font-size: 24px;
+}

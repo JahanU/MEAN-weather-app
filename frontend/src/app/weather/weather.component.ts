@@ -6,6 +6,8 @@ import { singleWeather } from '../models/singleWeather.model';
 import { location } from '../models/location.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { StatsService } from '../services/stats.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-weather',
@@ -28,6 +30,8 @@ import { StatsService } from '../services/stats.service';
 })
 export class WeatherComponent implements OnInit {
 
+  public weatherDataObs: Observable<any>; // (This is only used for learning testing)
+
   // Will be accessible by children component
   public weatherData: singleWeather;
   public timeData: singleTimezone;
@@ -42,9 +46,10 @@ export class WeatherComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.weatherDataObs = this.weatherService.fetchWeatherByName('London');
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position: Position) => {
-        console.log('got location: ', position.coords);
         const coords = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
@@ -52,7 +57,7 @@ export class WeatherComponent implements OnInit {
         this.fetchLocationByCoords(coords);
       }, (error) => { // Location access denied 
         console.log(error);
-        this.fetchLocationByName('GuelpH'); // Default location search
+        this.fetchLocationByName('London'); // Default location search
       }
       );
     }
@@ -63,6 +68,7 @@ export class WeatherComponent implements OnInit {
     const { lat, lng } = coords; // Event from click on map
     this.weatherService.fetchWeatherByCoords(lat, lng).subscribe((data) => {
       this.weatherData = data;
+      console.log(data);
       this.fetchLocationTimes(data);
       this.fetchAllSearchedLocations();
     }, (error) => {
@@ -75,6 +81,7 @@ export class WeatherComponent implements OnInit {
     this.reset();
     this.weatherService.fetchWeatherByName(locationName.toLowerCase()).subscribe((data) => {
       this.weatherData = data;
+      console.log(data);
       this.fetchLocationTimes(data);
       this.fetchAllSearchedLocations();
     }, (error) => {
@@ -86,6 +93,7 @@ export class WeatherComponent implements OnInit {
   fetchLocationTimes(weatherData: singleWeather) {
     this.timeService.getTimeOfLocation(weatherData.coord.lat, weatherData.coord.lon).subscribe((timeData) => {
       this.timeData = timeData;
+      console.log(timeData);
       this.fadeState = true;
     }, (error) => {
       console.log('err: ', error);
@@ -96,6 +104,7 @@ export class WeatherComponent implements OnInit {
   fetchAllSearchedLocations() {
     this.statsService.fetchAllSearched().subscribe((data) => {
       this.locationFreqData = data;
+      console.log(data);
     }, (error) => {
       console.log('err: ', error);
       this.errorMessage = error;

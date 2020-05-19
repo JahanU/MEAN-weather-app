@@ -1,36 +1,41 @@
 <!-- <div class="container"> -->
+
 <div class="row">
     <div class="col-12">
-
         <mat-toolbar color="primary">
             Location info finder
         </mat-toolbar>
-        <mat-form-field>
-            <mat-label>Enter a location</mat-label>
-            <input #box matInput placeholder="Ex. Toronto" (keyup.enter)="fetchLocationByName(box.value)">
-        </mat-form-field>
 
-        <div *ngIf="errorMessage">
-            <p> Invalid location. Please try again</p>
-            <p>{{errorMessage}}</p>
-        </div>
+        <div class="container-fluid">
+            <mat-form-field>
+                <mat-label>Enter a location</mat-label>
+                <input #box matInput placeholder="Ex. Toronto" (keyup.enter)="fetchLocationByName(box.value)">
+            </mat-form-field>
 
-        <div [@fadeTrigger]="getFadeState()">
-            <div class="row">
-                <div class="col-6">
-                    <app-weather-data [weatherData]="weatherData" [timeData]="timeData"></app-weather-data>
-                </div>
-                <div class="col-6">
-                    <app-weather-map [weatherData]="weatherData" [timeData]="timeData"
-                        (outputClickCoords)="fetchLocationByCoords($event)">
-                    </app-weather-map>
-                </div>
+            <div *ngIf="errorMessage">
+                <p> Invalid location. Please try again</p>
+                <p>{{errorMessage}}</p>
             </div>
 
-            <hr>
-            <app-weather-table [locationFreqData]="locationFreqData"> </app-weather-table>
-        </div>
+            <!-- <div [@fadeTrigger]="getFadeState()"> -->
 
+            <div>
+                <div class="row">
+                    <div class="col-6">
+                        <app-weather-data [weatherData]="weatherData" [timeData]="timeData"></app-weather-data>
+                    </div>
+                    <div class="col-6">
+                        <app-weather-map [weatherData]="weatherData" [timeData]="timeData"
+                            (outputClickCoords)="fetchLocationByCoords($event)">
+                        </app-weather-map>
+                    </div>
+                </div>
+
+                <hr>
+                <app-weather-table [locationFreqData]="locationFreqData"> </app-weather-table>
+            </div>
+
+        </div>
     </div>
 </div>
 <!-- </div> -->

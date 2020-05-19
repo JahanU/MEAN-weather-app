@@ -6,10 +6,10 @@ export interface singleTimezone {
   formatted: string;
   gmtOffset: number;
   message: string;
-  nextAbbreviation: null;
+  nextAbbreviation: string;
   status: string;
   timestamp: number;
-  zoneEnd: null;
+  zoneEnd: number;
   zoneName: string;
   zoneStart: number;
   date: Date;

@@ -12,7 +12,7 @@ export interface singleWeather {
         humidity: number,
         temp_min: number,
         temp_max: number,
-        feels_like: string
+        feels_like: number
     },
     dt: number,
     wind: {
@@ -30,14 +30,13 @@ export interface singleWeather {
         sunriseString: string,
         sunsetString: string,
         isDayTime: boolean
-    }
+    },
     timezone: number,
     weather: [
         {
             id: number,
             main: string,
             description: string,
-            icon: Blob
         }
     ]
 }
