@@ -1,3 +1,4 @@
+const PORT = process.env.PORT || 3000;
 const express = require('express'); // Web server
 const app = express();
 const mongoose = require('mongoose'); // Connect to DB
@@ -47,4 +48,4 @@ mongoose.connect(process.env.DB_CONNECTION, {
     console.log('Succesfully connected to DB..');
 });
 
-app.listen(3000, () => console.log('starting server..'));
+app.listen(PORT, () => console.log('starting server..'));
