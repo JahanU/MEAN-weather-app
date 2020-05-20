@@ -79,23 +79,28 @@ describe('SearchWeatherComponent', () => {
 
     TestBed.configureTestingModule({ // Setup environment specific for this enviroment 
       declarations: [WeatherDataComponent],
-      // providers: [{ provide: WeatherService, useValue: weatherStub }] 
-      // Tells service to use stub instead of live data / Used for observable data
+      // providers: [{ provide: WeatherService, useValue: weatherStub }] // Tells service to use stub instead of live data / Used for observable data
     })
-      .compileComponents();
+      .compileComponents(); // Compiles the data within the component
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WeatherDataComponent); // Provides testing component
+    fixture = TestBed.createComponent(WeatherDataComponent);
     component = fixture.componentInstance;
     de = fixture.debugElement;
     component.weatherData = weatherStub;
     component.timeData = timeStub;
     fixture.detectChanges();
   });
+
   /* Unit testing ...
   I am aware each single test should be in a seperate funciton/method, but for reducing code size,
   I have grouped them together */
+
+  it('should contain "Humidty"', () => {
+    const bannerElement: HTMLElement = fixture.nativeElement; // Any HTML element
+    expect(bannerElement.textContent).toContain('Humidty');
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
