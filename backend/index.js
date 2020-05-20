@@ -7,6 +7,8 @@ const morgan = require('morgan'); // Log all API calls
 var cors = require('cors') // Enable Cross-origin resource sharing (Access from any IP)
 require('dotenv/config'); // Init .env file
 
+app.use(express.static('client'));
+
 app.use(bodyParser.json()); // Parse ALL data
 app.use(cors());
 app.use(morgan('dev'));
