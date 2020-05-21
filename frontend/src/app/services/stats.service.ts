@@ -10,11 +10,14 @@ import { catchError } from 'rxjs/operators';
 })
 export class StatsService {
 
+    url = environment.API_URL + 'api/location/all';
+
     constructor(private http: HttpClient) { }
 
     fetchAllSearched(): Observable<location[]> { // locationFreqData
 
-        return this.http.get<location[]>(environment.API_URL)
+        console.log('try: ', this.url);
+        return this.http.get<location[]>(this.url)
             .pipe(catchError(this.errorHandler));
     }
 

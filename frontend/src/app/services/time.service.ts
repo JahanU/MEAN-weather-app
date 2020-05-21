@@ -10,6 +10,7 @@ import { throwError, Observable } from 'rxjs';
 })
 export class TimeService {
 
+    url = environment.API_URL + 'api/time-date';
     constructor(private http: HttpClient) { }
 
     getTimeOfLocation(lat: number, lng: number): Observable<singleTimezone> {
@@ -17,7 +18,7 @@ export class TimeService {
             .set('lat', lat.toString())
             .append('lng', lng.toString())
 
-        return this.http.get<singleTimezone>(environment.API_URL, { params })
+        return this.http.get<singleTimezone>(this.url, { params })
             .pipe(catchError(this.errorHandler));
     }
 
