@@ -77,17 +77,17 @@ describe('WeatherComponent', () => {
     fixture.detectChanges();
   });
 
-  it('Should create', () => {
-    expect(component).toBeTruthy();
-  });
+  // it('Should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
 
-  it('API STUB Test', () => {
-    component.weatherDataObs.subscribe((data) => {
-      console.log('Stub: ', data);
-      expect(component).toBeDefined();
-      expect(data.name).toContain('Liverpool');
-    })
-  });
+  // it('API STUB Test', () => {
+  //   component.weatherDataObs.subscribe((data) => {
+  //     console.log('Stub: ', data);
+  //     expect(component).toBeDefined();
+  //     expect(data.name).toContain('Liverpool');
+  //   })
+  // });
 
 
 });

@@ -4,6 +4,8 @@
     <div class="col-12">
         <mat-toolbar color="primary">
             Location info finder
+            <hr>
+            <small> v1.1</small>
         </mat-toolbar>
 
         <div class="container-fluid">
@@ -17,14 +19,16 @@
                 <p>{{errorMessage}}</p>
             </div>
 
-            <!-- <div [@fadeTrigger]="getFadeState()"> -->
-
-            <div>
+            <div [@fadeTrigger]="getFadeState()">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <app-weather-data [weatherData]="weatherData" [timeData]="timeData"></app-weather-data>
                     </div>
-                    <div class="col-6">
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-12">
                         <app-weather-map [weatherData]="weatherData" [timeData]="timeData"
                             (outputClickCoords)="fetchLocationByCoords($event)">
                         </app-weather-map>

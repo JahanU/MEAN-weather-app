@@ -6,8 +6,7 @@ import { singleWeather } from '../models/singleWeather.model';
 import { location } from '../models/location.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { StatsService } from '../services/stats.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-weather',
@@ -30,8 +29,6 @@ import { Observable } from 'rxjs';
 })
 export class WeatherComponent implements OnInit {
 
-  public weatherDataObs: Observable<any>; // (This is only used for learning testing)
-
   // Will be accessible by children component
   public weatherData: singleWeather;
   public timeData: singleTimezone;
@@ -46,8 +43,6 @@ export class WeatherComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.weatherDataObs = this.weatherService.fetchWeatherByName('London');
-
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position: Position) => {
         const coords = {
