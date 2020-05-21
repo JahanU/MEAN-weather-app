@@ -10,15 +10,13 @@ import { catchError } from 'rxjs/operators';
 })
 export class WeatherService {
 
-  url = 'http://localhost:3000/api/location';
-
   constructor(private http: HttpClient) { }
 
   fetchWeatherByName(locationName: string): Observable<singleWeather> {
     let params = new HttpParams()
       .set('locationName', locationName)
 
-    return this.http.get<singleWeather>(this.url, { params })
+    return this.http.get<singleWeather>(environment.API_URL, { params })
       .pipe(catchError(this.errorHandler));
   }
 
@@ -27,7 +25,7 @@ export class WeatherService {
       .set('lat', lat.toString())
       .append('lon', lon.toString());
 
-    return this.http.get<singleWeather>(this.url, { params })
+    return this.http.get<singleWeather>(environment.API_URL, { params })
       .pipe(catchError(this.errorHandler));
   }
 

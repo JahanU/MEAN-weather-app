@@ -1,4 +1,3 @@
-const PORT = process.env.PORT || 3000;
 const express = require('express'); // Web server
 const app = express();
 const mongoose = require('mongoose'); // Connect to DB
@@ -42,7 +41,7 @@ app.use((err, req, res, next) => {
 });
 
 // Connect to DB 
-mongoose.connect(process.env.DB_CONNECTION, {
+mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
@@ -50,4 +49,5 @@ mongoose.connect(process.env.DB_CONNECTION, {
     console.log('Succesfully connected to DB..');
 });
 
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log('starting server..'));

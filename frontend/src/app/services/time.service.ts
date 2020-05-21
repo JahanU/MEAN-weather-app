@@ -13,12 +13,11 @@ export class TimeService {
     constructor(private http: HttpClient) { }
 
     getTimeOfLocation(lat: number, lng: number): Observable<singleTimezone> {
-        const url = 'http://localhost:3000/api/time-date';
         let params = new HttpParams()
             .set('lat', lat.toString())
             .append('lng', lng.toString())
 
-        return this.http.get<singleTimezone>(url, { params })
+        return this.http.get<singleTimezone>(environment.API_URL, { params })
             .pipe(catchError(this.errorHandler));
     }
 

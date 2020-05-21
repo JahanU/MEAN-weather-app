@@ -13,9 +13,8 @@ export class StatsService {
     constructor(private http: HttpClient) { }
 
     fetchAllSearched(): Observable<location[]> { // locationFreqData
-        const url = 'http://localhost:3000/api/location/all';
 
-        return this.http.get<location[]>(url)
+        return this.http.get<location[]>(environment.API_URL)
             .pipe(catchError(this.errorHandler));
     }
 
