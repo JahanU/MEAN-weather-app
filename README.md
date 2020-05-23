@@ -2,8 +2,9 @@ This project was created to further develop my skills and to become more familar
 
 Some implementation choices were done to incoperate as much of the stack as possible.
 
-Frontend hosting via Github Pages
-Backend via Heroku
+- Frontend hosting via Github Pages
+
+- Backend via Heroku
 
 # MEAN Stack Weather App
 
