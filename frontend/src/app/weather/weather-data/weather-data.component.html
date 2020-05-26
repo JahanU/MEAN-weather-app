@@ -2,12 +2,11 @@
   <div *ngIf="weatherData && timeData" class="weatherWidgetRow">
     <i *ngIf="timeData?.isDay == true" class="fa fa-sun sun"> </i>
     <i *ngIf="timeData?.isDay == false" class="fa fa-moon moon"> </i>
-
     <i *ngIf="timeData && containsRain(weatherData.weather[0].description)" class="fa fa-cloud-showers-heavy rain"></i>
     <i *ngIf="timeData && containsClouds(weatherData.weather[0].description)" class="fa fa-cloud cloud"></i>
     <i *ngIf="timeData && containsSnow(weatherData.weather[0].description)" class="fa fa-snowflake snowflake"></i>
 
-    <div *ngIf="weatherData && timeData">
+    <div>
       <h5> <b> {{weatherData.name}}, {{weatherData.sys.country}}</b></h5>
       <p> <b> {{timeData.dateString}}, {{timeData.currentTime || '00,00,00'}} </b></p>
       <p> <b> {{weatherData.weather[0].description | titlecase }} </b></p>

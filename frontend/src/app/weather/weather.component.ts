@@ -63,7 +63,7 @@ export class WeatherComponent implements OnInit {
     const { lat, lng } = coords; // Event from click on map
     this.weatherService.fetchWeatherByCoords(lat, lng).subscribe((data) => {
       this.weatherData = data;
-      console.log(data);
+      //  console.log(data);
       this.fetchLocationTimes(data);
       this.fetchAllSearchedLocations();
     }, (error) => {
@@ -76,7 +76,7 @@ export class WeatherComponent implements OnInit {
     this.reset();
     this.weatherService.fetchWeatherByName(locationName.toLowerCase()).subscribe((data) => {
       this.weatherData = data;
-      console.log(data);
+      // console.log(data);
       this.fetchLocationTimes(data);
       this.fetchAllSearchedLocations();
     }, (error) => {
@@ -88,7 +88,7 @@ export class WeatherComponent implements OnInit {
   fetchLocationTimes(weatherData: singleWeather) {
     this.timeService.getTimeOfLocation(weatherData.coord.lat, weatherData.coord.lon).subscribe((timeData) => {
       this.timeData = timeData;
-      console.log(timeData);
+      console.log('timedata: ', timeData);
       this.fadeState = true;
     }, (error) => {
       console.log('err: ', error);
@@ -99,7 +99,7 @@ export class WeatherComponent implements OnInit {
   fetchAllSearchedLocations() {
     this.statsService.fetchAllSearched().subscribe((data) => {
       this.locationFreqData = data;
-      console.log(data);
+      // console.log(data);
     }, (error) => {
       console.log('err: ', error);
       this.errorMessage = error;

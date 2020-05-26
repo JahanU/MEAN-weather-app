@@ -8,11 +8,15 @@
             <small> v1.1</small>
         </mat-toolbar>
 
+        <mat-progress-bar *ngIf="!(timeData || weatherData)" mode="buffer"></mat-progress-bar>
+
         <div class="container-fluid">
             <mat-form-field>
                 <mat-label>Enter a location</mat-label>
                 <input #box matInput placeholder="Ex. Toronto" (keyup.enter)="fetchLocationByName(box.value)">
             </mat-form-field>
+            <button mat-raised-button color="primary" [disabled]="box.value.length == 0"
+                (click)="fetchLocationByName(box.value)">Search</button>
 
             <div *ngIf="errorMessage">
                 <p> Invalid location. Please try again</p>
