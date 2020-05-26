@@ -10,7 +10,7 @@
     <div *ngIf="weatherData && timeData">
       <h5> <b> {{weatherData.name}}, {{weatherData.sys.country}}</b></h5>
       <p> <b> {{timeData.dateString}}, {{timeData.currentTime || '00,00,00'}} </b></p>
-      <p> <b> {{weatherData.weather[0].description}} </b></p>
+      <p> <b> {{weatherData.weather[0].description | titlecase }} </b></p>
       <p> Feels like: <b> {{weatherData.main.feels_like}}°C </b></p>
       <p> Humidty: <b> {{weatherData.main.humidity}}%</b> </p>
       <p> Wind speed: <b> {{weatherData.wind.speed}}mph</b>,<b> {{weatherData.wind.cardinalDirection}}</b> </p>
