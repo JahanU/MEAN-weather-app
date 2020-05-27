@@ -12,13 +12,15 @@ import { environment } from 'src/environments/environment';
 import { WeatherMapComponent } from './weather/weather-map/weather-map.component';
 import { WeatherTableComponent } from './weather/weather-table/weather-table/weather-table.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { InfoDialogComponent } from './weather/info-dialog/info-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
     WeatherComponent,
     WeatherDataComponent,
     WeatherMapComponent,
-    WeatherTableComponent
+    WeatherTableComponent,
+    InfoDialogComponent
   ],
   imports: [
     MatNativeDateModule,
@@ -30,6 +32,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     AgmCoreModule.forRoot({
       apiKey: environment.GOOGLE_API_KEY
     }),
+  ],
+  entryComponents: [
+    InfoDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
