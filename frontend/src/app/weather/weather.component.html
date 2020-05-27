@@ -5,7 +5,10 @@
         <mat-toolbar color="primary">
             Location info finder
             <hr>
-            <small> v1.2</small>
+            <button mat-mini-fab color="grey" (click)="openDialog()">
+                <mat-icon>bookmark</mat-icon>
+            </button>
+            <small> v1.3</small>
         </mat-toolbar>
 
         <mat-progress-bar *ngIf="!(timeData || weatherData)" mode="buffer"></mat-progress-bar>

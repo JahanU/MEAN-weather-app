@@ -6,8 +6,9 @@ import { singleWeather } from '../models/singleWeather.model';
 import { location } from '../models/location.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { StatsService } from '../services/stats.service';
-
-
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
@@ -40,7 +41,8 @@ export class WeatherComponent implements OnInit {
   constructor(
     private weatherService: WeatherService,
     private timeService: TimeService,
-    private statsService: StatsService
+    private statsService: StatsService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -58,6 +60,10 @@ export class WeatherComponent implements OnInit {
       }
       );
     }
+  }
+
+  openDialog() {
+    this.dialog.open(InfoDialogComponent);
   }
 
   getUserTimezone(coords) {
