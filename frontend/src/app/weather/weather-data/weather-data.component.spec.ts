@@ -143,6 +143,9 @@ describe('SearchWeatherComponent', () => {
 
     // formatted: '2020-05-19 13:28:00',
     // component.timeData = timeStub;
+
+    component.userGeoTimezone = 3600;
+
     expect(component.setTimes()).toBeTruthy();
 
     component.timeData.formatted = '2020-05-19 21:10:40'; // Still day time
@@ -160,14 +163,5 @@ describe('SearchWeatherComponent', () => {
     component.timeData.formatted = '2020-05-19 05:04:52';
     expect(component.setTimes()).toBeTruthy();
   });
-
-  it('Time should increase by 1 second', fakeAsync(() => {
-    const currentTime = timeStub.date; // Will be 1s behind
-    component.updateTimeEverySec();
-    discardPeriodicTasks();
-    tick(1001);
-    const latestTime = component.timeData.date > currentTime;
-    expect(latestTime).toBeTruthy();
-  }));
 
 });
