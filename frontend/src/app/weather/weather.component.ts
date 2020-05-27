@@ -30,6 +30,7 @@ import { StatsService } from '../services/stats.service';
 export class WeatherComponent implements OnInit {
 
   // Will be accessible by children component
+  public userGeoTimezone: number;
   public weatherData: singleWeather;
   public timeData: singleTimezone;
   public locationFreqData: location[];
@@ -49,6 +50,7 @@ export class WeatherComponent implements OnInit {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
+        this.getUserTimezone(coords);
         this.fetchLocationByCoords(coords);
       }, (error) => { // Location access denied 
         console.log(error);
@@ -56,6 +58,13 @@ export class WeatherComponent implements OnInit {
       }
       );
     }
+  }
+
+  getUserTimezone(coords) {
+    const { lat, lng } = coords; // Event from click on map
+    this.weatherService.fetchWeatherByCoords(lat, lng).subscribe((data) => {
+      this.userGeoTimezone = data.timezone;
+    });
   }
 
   fetchLocationByCoords(coords) {

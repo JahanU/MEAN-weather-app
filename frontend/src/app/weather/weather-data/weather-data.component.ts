@@ -9,6 +9,7 @@ import { singleTimezone } from 'src/app/models/singleTimezone.model';
 export class WeatherDataComponent implements OnInit {
   @Input() weatherData: singleWeather;
   @Input() timeData: singleTimezone;
+  @Input() userGeoTimezone: number;
   showErrorMessage = false;
   timerIntevalId; // Reset the timer when searching new location (used for updating the time every second)
   currentDate;
@@ -39,11 +40,11 @@ export class WeatherDataComponent implements OnInit {
     this.timeData.dateString = this.timeData.formatted.split(' ')[0]; // Just get date; 2020-05-11
 
     let sunrise = new Date((this.weatherData.sys.sunrise * 1000));
-    sunrise.setSeconds(sunrise.getSeconds() + (this.weatherData.timezone - 3600));
+    sunrise.setSeconds(sunrise.getSeconds() + (this.weatherData.timezone - this.userGeoTimezone));
     this.weatherData.sys.sunriseString = sunrise.toLocaleTimeString();
 
     let sunset = new Date((this.weatherData.sys.sunset * 1000));
-    sunset.setSeconds(sunset.getSeconds() + (this.weatherData.timezone - 3600));
+    sunset.setSeconds(sunset.getSeconds() + (this.weatherData.timezone - this.userGeoTimezone));
     this.weatherData.sys.sunsetString = sunset.toLocaleTimeString();
 
     return this.timeData.date >= sunrise && this.timeData.date <= sunset;
