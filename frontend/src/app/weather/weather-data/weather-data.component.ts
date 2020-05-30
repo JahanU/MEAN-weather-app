@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, OnChanges } from '@angular/core';
 import { singleWeather } from 'src/app/models/singleWeather.model';
 import { singleTimezone } from 'src/app/models/singleTimezone.model';
+
 @Component({
   selector: 'app-weather-data',
   templateUrl: './weather-data.component.html',
@@ -9,7 +10,7 @@ import { singleTimezone } from 'src/app/models/singleTimezone.model';
 export class WeatherDataComponent implements OnInit {
   @Input() weatherData: singleWeather;
   @Input() timeData: singleTimezone;
-  @Input() userGeoTimezone: number;
+  @Input() userGeoTimezone: number; // Default GMT timezone
   showErrorMessage = false;
   timerIntevalId; // Reset the timer when searching new location (used for updating the time every second)
   currentDate;
@@ -35,9 +36,8 @@ export class WeatherDataComponent implements OnInit {
   // Setters ********************************
   setTimes() {
     // Create date obj of current time date, and compare to location timezone/sunrise/sunset times
-    const removeDate = this.timeData.formatted.replace(/-/g, '/');
-    this.timeData.date = new Date(removeDate);
-    this.timeData.dateString = this.timeData.formatted.split(' ')[0]; // Just get date; 2020-05-11
+    const reformatDate = this.timeData.formatted.replace(/-/g, '/');
+    this.timeData.date = new Date(reformatDate);
 
     let sunrise = new Date((this.weatherData.sys.sunrise * 1000));
     sunrise.setSeconds(sunrise.getSeconds() + (this.weatherData.timezone - this.userGeoTimezone));

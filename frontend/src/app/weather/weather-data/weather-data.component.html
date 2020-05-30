@@ -8,7 +8,7 @@
 
     <div>
       <h5> <b> {{weatherData.name}}, {{weatherData.sys.country}}</b></h5>
-      <p> <b> {{timeData.dateString}}, {{timeData.currentTime || '00,00,00'}} </b></p>
+      <p> <b> {{timeData.date | date: 'dd/MM/yyyy'}}, {{timeData.currentTime || '00,00,00'}} </b></p>
       <p> <b> {{weatherData.weather[0].description | titlecase }} </b></p>
       <p> Feels like: <b> {{weatherData.main.feels_like}}°C </b></p>
       <p> Humidty: <b> {{weatherData.main.humidity}}%</b> </p>

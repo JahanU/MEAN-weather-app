@@ -11,7 +11,7 @@
             <small> v1.3</small>
         </mat-toolbar>
 
-        <mat-progress-bar *ngIf="!(timeData || weatherData)" mode="buffer"></mat-progress-bar>
+        <mat-progress-bar *ngIf="!fadeState" mode="buffer"></mat-progress-bar>
 
         <div class="container-fluid">
             <mat-form-field>

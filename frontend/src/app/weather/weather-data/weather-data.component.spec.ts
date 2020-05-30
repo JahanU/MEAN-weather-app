@@ -63,7 +63,6 @@ describe('SearchWeatherComponent', () => {
       countryName: 'United Kingdom',
       currentTime: '1:28:05 PM',
       date: new Date('Tue May 19 2020 13: 28: 05'),
-      dateString: '2020-05-19',
       dst: '1',
       formatted: '2020-05-19 13:28:00',
       gmtOffset: 3600,

@@ -31,7 +31,7 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 export class WeatherComponent implements OnInit {
 
   // Will be accessible by children component
-  public userGeoTimezone: number;
+  public userGeoTimezone = 3600;
   public weatherData: singleWeather;
   public timeData: singleTimezone;
   public locationFreqData: location[];
@@ -52,25 +52,17 @@ export class WeatherComponent implements OnInit {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
-        this.getUserTimezone(coords);
         this.fetchLocationByCoords(coords);
       }, (error) => { // Location access denied 
         console.log(error);
-        this.fetchLocationByName('London'); // Default location search
       }
       );
     }
+    this.fetchLocationByName('London'); // Default location search
   }
 
   openDialog() {
     this.dialog.open(InfoDialogComponent);
-  }
-
-  getUserTimezone(coords) {
-    const { lat, lng } = coords; // Event from click on map
-    this.weatherService.fetchWeatherByCoords(lat, lng).subscribe((data) => {
-      this.userGeoTimezone = data.timezone;
-    });
   }
 
   fetchLocationByCoords(coords) {
@@ -78,6 +70,7 @@ export class WeatherComponent implements OnInit {
     const { lat, lng } = coords; // Event from click on map
     this.weatherService.fetchWeatherByCoords(lat, lng).subscribe((data) => {
       this.weatherData = data;
+      this.userGeoTimezone = data.timezone;
       //  console.log(data);
       this.fetchLocationTimes(data);
       this.fetchAllSearchedLocations();
@@ -107,8 +100,11 @@ export class WeatherComponent implements OnInit {
       this.fadeState = true;
     }, (error) => {
       console.log('err: ', error);
+      // if (this.weatherData == undefined) {
       this.errorMessage = error;
+      // }
     });
+
   }
 
   fetchAllSearchedLocations() {

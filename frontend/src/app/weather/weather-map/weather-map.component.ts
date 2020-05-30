@@ -15,7 +15,6 @@ export class WeatherMapComponent implements OnInit {
   // Emit data for weather.component 
   @Output() outputClickCoords = new EventEmitter<Coordinates>();
 
-
   constructor() { }
 
   ngOnInit(): void { }
