@@ -1,4 +1,4 @@
-This project was created to further develop my skills and to become more familar and comfortable with the MEAN (MongoDB, Express, Angular, Node) stack.
+This project was created to further develop my skills with the MEAN (MongoDB, Express, Angular, Node) stack.
 
 Some implementation choices were done to incoperate as much of the stack as possible.
 
