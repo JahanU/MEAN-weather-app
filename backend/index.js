@@ -25,6 +25,11 @@ app.get('/', (req, res) => {
     res.send('on home');
 });
 
+app.get('/test', (req, res) => {
+    console.log('test endpoint!');
+    res.send('test endpoint!');
+});
+
 app.use((req, res, next) => { // Invalid URL / No endpoint was found
     const error = new Error('Not found');
     error.status = 404;

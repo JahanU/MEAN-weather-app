@@ -16,7 +16,10 @@ export class WeatherService {
 
   fetchWeatherByName(locationName: string): Observable<singleWeather> {
     let params = new HttpParams()
-      .set('locationName', locationName)
+      .set('locationName', locationName);
+      
+      console.log('passing params:', params);
+      console.log(this.url + params);
 
     return this.http.get<singleWeather>(this.url, { params })
       .pipe(catchError(this.errorHandler));

@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
     console.log('GET (VIA NAME / LAT & LON): received query at location');
     try {
         if (req.query.locationName) {
-            weatherUrl.searchParams.set('a', req.query.locationName);
+            weatherUrl.searchParams.set('q', req.query.locationName);
         }
         else {
             weatherUrl.searchParams.set('lat', req.query.lat);

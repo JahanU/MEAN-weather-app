@@ -58,6 +58,7 @@ export class WeatherComponent implements OnInit {
       }
       );
     }
+
     this.fetchLocationByName('London'); // Default location search
   }
 
