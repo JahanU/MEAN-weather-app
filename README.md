@@ -7,7 +7,7 @@ Some implementation choices were done to incoperate as much of the stack as poss
 - Geolocation
 - Interactive Google Maps
 - Feature packed grid with user searches data
-- Automated unit testing via Karma, Jasmine and Travis CI
+- Automated unit testing with Karma, Jasmine and Travis CI
 
 # Stack
 - Frontend hosting via Github Pages
