@@ -13,7 +13,7 @@ Some implementation choices were done to incoperate as much of the stack as poss
 - Frontend hosting via Github Pages
 - Backend via Heroku
 - MongoDB, Express, Angular, Node (MEAN Stack)
-- 
+
 # MEAN Stack Weather App
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.3.
