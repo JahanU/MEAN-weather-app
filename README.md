@@ -10,8 +10,8 @@ Some implementation choices were done to incoperate as much of the stack as poss
 - Automated unit testing with Karma, Jasmine and Travis CI
 
 # Stack
-- Frontend hosting via Github Pages
-- Backend via Heroku
+- Frontend hosted via Github Pages
+- Backend hosted via Heroku
 - MongoDB, Express, Angular, Node (MEAN Stack)
 
 # MEAN Stack Weather App
